@@ -32,7 +32,25 @@ export default function AboutPage() {
           />
         </Container>
       </section>
-
+      {/* brand video intro */}
+      <section id="brand-intro" className="py-12 sm:py-20 border-t border-line bg-smoke">
+        <Container>
+          <div className="max-w-3xl mx-auto text-center">
+            <Media
+              src="/media/brand/LOGO.mp4"
+              alt="Audrey Allen Pictures Brand Intro"
+              accent={studio.accent}
+              className="relative h-[300px] w-full object-cover rounded-xl mb-8"
+            />
+            <h2 className="label text-ash">Audrey Allen Pictures</h2>
+            <p className="mt-4 text-[1.1rem] text-[0.95rem] text-ink/70 leading-relaxed">
+              Celebrating over a decade of bringing African stories to the world through
+              innovative filmmaking and entertainment.
+            </p>
+          </div>
+        </Container>
+      </section>
+      {/* about */}
       {/* about */}
       <section id="about" className="scroll-mt-20 py-16 sm:py-24">
         <Container>

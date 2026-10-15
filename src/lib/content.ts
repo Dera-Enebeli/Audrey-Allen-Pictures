@@ -80,7 +80,6 @@ export const films: Film[] = [
       "A romantic drama about two individuals brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal, emotional discovery, and an unexpected journey toward love. Distributed by Kada Entertainment to more than 50 cinemas.",
     poster: "/media/films/i-love-you-regardless/poster.jpg",
     backdrop: "/media/films/i-love-you-regardless/backdrop.jpg",
-    video: "/media/films/i-love-you-regardless/preview.mp4",
     accent: "#4a2b3a",
   },
   {

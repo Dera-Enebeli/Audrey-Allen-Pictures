@@ -16,7 +16,7 @@ export default function FoundationPage() {
   return (
     <>
       {/* hero */}
-      <section className="relative flex h-[82svh] min-h-[560px] items-end overflow-hidden bg-ink">
+      <section className="relative flex h-[75svh] min-h-[560px] items-end overflow-hidden bg-ink">
         <div className="absolute inset-0">
           <Media
             src={foundation.image}
