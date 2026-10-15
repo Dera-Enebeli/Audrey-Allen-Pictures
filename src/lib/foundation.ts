@@ -15,12 +15,12 @@ export interface FocusArea {
 }
 
 export const foundation = {
-  name: "Audrey Allen Foundation for Children",
-  abbr: "AAFC",
-  tagline: "Saving Lives Through Entertainment",
+  name: "Audrey Allen Pictures",
+  abbr: "AAP",
+  tagline: "Telling African Stories. Inspiring the World.",
   founder: "Tosin Allen",
 
-  image: "/media/foundation/hero.jpg",
+  image: "/media/foundation/foundationmain.jpg",
   accent: "#123a2c",
 
   lede: "A child-focused charitable initiative founded by Tosin Allen, dedicated to improving the lives of vulnerable and disadvantaged children through education, child welfare, entertainment, advocacy and strategic partnerships.",
