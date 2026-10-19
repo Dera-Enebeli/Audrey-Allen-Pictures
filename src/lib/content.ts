@@ -162,10 +162,10 @@ export const films: Film[] = [
     title: "Noise",
     year: 2026,
     status: "In Development",
-    genres: [],
+    genres: ["Horror", "Psychological Thriller"],
     director: "Audrey Allen Pictures",
     synopsis:
-      "A new feature from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
+      "A reunion meant to rekindle old friendships becomes a nightmare when a group of former friends reunite after years apart, only to discover that the past they have tried so hard to forget is far from buried.\n\nWhat begins as a night of laughter, nostalgia, and celebration soon takes a disturbing turn as strange occurrences, unexplained sounds, and terrifying encounters expose the cracks beneath their carefully constructed lives. As fear spreads and suspicion grows, the friends begin to question one another, unsure of who can be trusted and who may be hiding something far more sinister.\n\nBut the real horror is not just what they hear or see. It is what they remember.\n\nAs buried secrets emerge and the night descends into chaos, the group discovers that their reunion may not be a coincidence. Someone—or something—has brought them together for a reason, and escaping the nightmare may require confronting the truth they have spent years trying to silence.\n\nIn NOISE, the past refuses to stay quiet, guilt becomes a weapon, and every sound could be a warning. When the truth finally comes to light, the survivors must face a terrifying question: will they make it out alive, or will the sins of their past become their final undoing?",
     poster: "/media/films/noise/poster.jpg",
     accent: "#2b2b2b",
   },
@@ -179,9 +179,9 @@ export const series: Series[] = [
     status: "In Development",
     network: "In development",
     seasonLabel: "Season One",
-    genres: [],
+    genres: ["Young Adult Fiction", "Educational Drama", "Social Development"],
     synopsis:
-      "An original series from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
+      "Redcrest High is a compelling exploration of adolescent life, examining the social pressures, personal conflicts, and moral dilemmas that shape young people during one of the most critical stages of their development.\n\nSet against the backdrop of high school, the book examines the realities of growing up in an environment where academic expectations, social hierarchies, peer influence, family pressures, and the pursuit of acceptance often compete with personal values and sound judgment. As students navigate friendships, relationships, identity, ambition, and the consequences of their decisions, they are confronted with challenges that test their emotional maturity, integrity, and sense of responsibility.\n\nThe book addresses issues that significantly influence adolescent behaviour, including bullying, discrimination, manipulation, unhealthy relationships, dishonesty, insecurity, and the pressure to conform. It explores how these experiences affect self-esteem, academic performance, interpersonal relationships, and the development of personal values. It also considers the role of family, educators, and the wider school community in shaping young people's attitudes, choices, and understanding of right and wrong.\n\nBeyond its portrayal of school life, Redcrest High offers an educational perspective on the relationship between individual decisions and their wider consequences. It encourages young readers to examine their attitudes, recognise harmful patterns of behaviour, develop critical thinking skills, and understand the importance of accountability, empathy, respect, and responsible decision-making.\n\nDesigned to stimulate reflection and meaningful discussion among students, parents, and educators, the book provides an opportunity to address the social and emotional challenges of adolescence in a relatable and constructive manner.\n\nUltimately, Redcrest High is a story about character formation, personal responsibility, and the transition from adolescence to adulthood. It reinforces the importance of making informed choices, establishing healthy boundaries, resisting destructive influences, and recognising that the values developed during the school years can have a lasting impact on an individual's future.",
     poster: "/media/series/red-crest-high/poster.jpg",
     accent: "#5a1f22",
     basedOn: {
@@ -356,6 +356,10 @@ export interface UpcomingProject {
   releaseLabel: string;
   image: string;
   accent: string;
+  /** Short synopsis for potential detail page or hover */
+  synopsis?: string;
+  /** Genres for display */
+  genres?: string[];
 }
 
 /**
@@ -364,20 +368,26 @@ export interface UpcomingProject {
  */
 export const upcomingProjects: UpcomingProject[] = [
   {
-    slug: "project-01",
-    title: "Untitled Project 01", // TODO: real title
+    slug: "mbuna-hearts",
+    title: "Mbuna Hearts",
     status: "In Development",
-    releaseLabel: "TBA", // TODO: real date
+    releaseLabel: "TBA",
     image: "/upcoming-projects/project-01.jpg",
-    accent: "#4a2b3a",
+    accent: "#2e6b4f",
+    genres: ["Romance", "Drama"],
+    synopsis:
+      "Set against the breathtaking landscapes and vibrant cultural beauty of Malawi, Mbuna Hearts is a cross-border romantic drama about love, friendship, rivalry, and the unexpected consequences of following one's heart.\n\nTwo Nigerian men, bound by a close friendship, travel to Malawi for a tourist vacation, hoping to escape their everyday routines and experience the beauty, culture, and hospitality of a new country. Their adventure takes an unexpected turn when they meet a beautiful and charismatic Malawian female tour guide who introduces them to the wonders of her homeland.\n\nAs they explore Malawi's stunning tourist destinations, including the breathtaking shores of Lake Malawi, both men find themselves falling deeply in love with the same woman. What begins as an innocent holiday romance soon develops into a complicated emotional triangle that threatens to destroy their friendship.\n\nCaught between loyalty to one another and their growing desire for the woman they both love, the two friends find themselves facing difficult choices. Jealousy, competition, and unspoken feelings begin to emerge, testing the strength of their bond and forcing each man to confront what he is truly willing to sacrifice for love.\n\nFor the Malawian tour guide, what should have been a professional encounter becomes a deeply personal dilemma as she discovers that her heart may be the very thing that separates two friends who once shared everything.\n\nAgainst the rich cultural backdrop of Malawi, Mbuna Hearts explores the complexities of cross-cultural romance, the power of attraction, and the fine line between friendship and rivalry. As emotions intensify and loyalties are tested, one question remains: can friendship survive when two men fall in love with the same woman?\n\nMbuna Hearts is a captivating story of love, cultural connection, and the difficult choices that arise when the heart refuses to choose an easy path.",
   },
   {
-    slug: "project-02",
-    title: "Untitled Project 02", // TODO: real title
+    slug: "the-alliance-of-rivers",
+    title: "The Alliance of Rivers",
     status: "In Development",
-    releaseLabel: "TBA", // TODO: real date
+    releaseLabel: "TBA",
     image: "/upcoming-projects/project-02.jpg",
-    accent: "#4a2b3a",
+    accent: "#3a5a4a",
+    genres: ["Epic Period Romance", "Political Drama"],
+    synopsis:
+      "An Epic Period Romance | Political Drama | Nigeria–Malawi\n\nSome nations are built on blood. Some legacies are built on lies. And some love stories refuse to die.\n\nAcross three decades of political upheaval, a forbidden love between a Nigerian political heir and a Malawian woman becomes entangled in the ambitions of two nations, setting in motion a chain of events whose consequences will outlive the people who started them.\n\nTheir story begins in a time when Africa is wrestling with the burden of its past and the uncertain promise of its future. In the corridors of political power, alliances are negotiated in secret, loyalties are bought and sold, and the fate of millions rests in the hands of men determined to shape history on their own terms. It is into this volatile world that two young people from different nations fall in love, discovering in each other a freedom that neither of their worlds is willing to grant them.\n\nHe is the son of a powerful Nigerian political figure, raised to understand that duty comes before desire and that the family name is a responsibility from which there is no escape. She is a fiercely independent Malawian woman whose family is bound to the country's political establishment, yet whose dreams extend beyond the ambitions of the men who govern her world. Their connection is immediate, profound, and dangerous. What begins as a private romance soon becomes a threat to carefully constructed political arrangements.\n\nWhen a political conspiracy erupts, their love is sacrificed at the altar of national interest. A decision made in one room, by men who will never have to live with its consequences, tears them apart and leaves behind a truth too dangerous to speak. Separated by geography, circumstance, and the weight of history, they are forced to build lives around an absence neither time nor ambition can erase.\n\nOver the next thirty years, Nigeria and Malawi change. Governments rise and fall. Ideologies collapse. Former enemies become allies, and yesterday's revolutionaries become tomorrow's establishment. Yet beneath the official histories, diplomatic ceremonies, and carefully preserved public reputations lies a private story of betrayal, sacrifice, and a love that was never given the chance to reach its natural end.\n\nThen, as a new generation moves into positions of power, the past begins to unravel. A long-buried secret threatens to expose the true origins of a historic political alliance, challenging the legitimacy of powerful figures and forcing their descendants to confront the consequences of decisions made before they were born. What emerges is not merely a scandal between two nations, but a devastating revelation about the price of ambition, the inheritance of guilt, and the human lives erased from the pages of history.\n\nSet against the majestic landscapes of Malawi, The Alliance of Rivers is an ambitious cinematic journey through love and loss, political betrayal, historical memory, and the fragile relationship between personal freedom and national duty. It is a story in which the intimate and the monumental collide: where a lover's promise can become a political liability, where silence can shape the destiny of nations, and where the passage of thirty years cannot guarantee that the truth will remain buried.\n\nAt its heart lies a haunting question: when history has taken everything from two people, can love still reclaim what power stole?\n\nTHE ALLIANCE OF RIVERS is a sweeping African period epic about two nations, three decades, and a love story history tried to erase.\n\nBecause history remembers those who ruled. But it rarely remembers those who paid the price.",
   },
 ];
 
