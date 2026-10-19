@@ -22,13 +22,7 @@ export function Logo({
         className="font-sans text-[1.0625rem] font-medium uppercase leading-none tracking-[-0.02em] sm:text-[1.1875rem]"
         style={{ color: tone === "paper" ? "#fff" : "var(--color-ink)" }}
       >
-        {site.brand.shortName}
-      </span>
-      <span
-        className="label hidden text-[0.625rem] opacity-60 sm:inline"
-        style={{ color: tone === "paper" ? "#fff" : "var(--color-ink)" }}
-      >
-        Pictures
+        {site.brand.name}
       </span>
     </Link>
   );
