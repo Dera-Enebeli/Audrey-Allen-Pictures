@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Film, NewsItem } from "@/lib/content";
+import type { Film, NewsItem, UpcomingProject } from "@/lib/content";
 import { activities, genreLabel, studio } from "@/lib/content";
 import { Media } from "./Media";
 import { Backdrop } from "./Backdrop";
@@ -194,6 +194,49 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
                 <ArrowUpRight className="h-3 w-3" />
               </span>
             </Link>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ------------------------------ Upcoming -------------------------------- */
+
+/**
+ * Teaser grid for in-development titles. Cards are deliberately not linked
+ * yet — they start linking to detail pages once real project info arrives.
+ */
+export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
+  if (!items.length) return null;
+  return (
+    <section className="border-t border-line py-16 sm:py-24">
+      <Container>
+        <SectionHeading label="In Development" title="Upcoming" />
+        <div className="mt-9 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-6">
+          {items.map((p) => (
+            <div key={p.slug} className="group">
+              <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
+                <Media
+                  src={p.image}
+                  alt={`Photograph from ${p.title}`}
+                  accent={p.accent}
+                  title={p.title}
+                  label="Upcoming"
+                  imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="label text-ash">{p.status}</span>
+                <span className="h-1 w-1 rounded-full bg-ash" />
+                <span className="label text-ash tabular-nums">
+                  {p.releaseLabel}
+                </span>
+              </div>
+              <h3 className="mt-2 font-sans text-[1.15rem] font-medium leading-tight tracking-[-0.01em]">
+                {p.title}
+              </h3>
+            </div>
           ))}
         </div>
       </Container>

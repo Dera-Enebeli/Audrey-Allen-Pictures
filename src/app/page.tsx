@@ -7,11 +7,12 @@ import {
   Feature,
   MissionTeaser,
   NewsSection,
+  UpcomingSection,
 } from "@/components/Sections";
 import { Container, SectionHeading } from "@/components/ui";
 import { Media } from "@/components/Media";
 import { railCell } from "@/components/cards";
-import { films, heroSlides, news, series } from "@/lib/content";
+import { films, heroSlides, news, series, upcomingProjects } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
@@ -101,6 +102,9 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Upcoming projects — placeholders pending real titles */}
+      <UpcomingSection items={upcomingProjects} />
 
       <MissionTeaser />
       <NewsSection items={news} />

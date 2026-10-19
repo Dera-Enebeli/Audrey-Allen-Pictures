@@ -344,6 +344,43 @@ export const news: NewsItem[] = [
   },
 ];
 
+/* --------------------------- Upcoming projects -------------------------- */
+
+export interface UpcomingProject {
+  slug: string;
+  /** Working title shown on the card. TODO: replace with the real title. */
+  title: string;
+  /** development stage shown above the title */
+  status: string;
+  /** planned release line. TODO: replace once dates are known. */
+  releaseLabel: string;
+  image: string;
+  accent: string;
+}
+
+/**
+ * Photos live in /public/upcoming-projects. Titles and release details are
+ * placeholders — update this array when the real information arrives.
+ */
+export const upcomingProjects: UpcomingProject[] = [
+  {
+    slug: "project-01",
+    title: "Untitled Project 01", // TODO: real title
+    status: "In Development",
+    releaseLabel: "TBA", // TODO: real date
+    image: "/upcoming-projects/project-01.jpg",
+    accent: "#4a2b3a",
+  },
+  {
+    slug: "project-02",
+    title: "Untitled Project 02", // TODO: real title
+    status: "In Development",
+    releaseLabel: "TBA", // TODO: real date
+    image: "/upcoming-projects/project-02.jpg",
+    accent: "#4a2b3a",
+  },
+];
+
 /* ------------------------------ Helpers -------------------------------- */
 
 export function getFilm(slug: string): Film | undefined {
