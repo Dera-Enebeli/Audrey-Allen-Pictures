@@ -154,7 +154,6 @@ export const films: Film[] = [
       { src: "/media/films/beguiled/cast/cast-06.jpg", alt: "Cast of Beguiled" },
       { src: "/media/films/beguiled/cast/cast-07.jpg", alt: "Cast of Beguiled" },
       { src: "/media/films/beguiled/cast/cast-08.jpg", alt: "Cast of Beguiled" },
-      { src: "/media/films/beguiled/cast/cast-09.jpg", alt: "Cast of Beguiled" },
       { video: "/media/films/beguiled/cast/behind-the-scenes.mp4", alt: "Behind the scenes of Beguiled" },
     ],
   },
