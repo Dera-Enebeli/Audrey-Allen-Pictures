@@ -38,7 +38,7 @@ export default function AboutPage() {
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             {/* LOGO.mp4 is portrait 3:4 — native-ratio frame, no cropping */}
-            <div className="relative mx-auto mb-8 aspect-[3/4] w-[300px] overflow-hidden sm:w-[360px]">
+            <div className="relative mx-auto mb-8 aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
               <Media
                 video="/media/brand/LOGO.mp4"
                 alt="Audrey Allen Pictures Brand Intro"

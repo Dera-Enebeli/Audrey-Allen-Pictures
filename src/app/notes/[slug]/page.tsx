@@ -65,7 +65,7 @@ export default async function NotePage({
         <div className="mt-12 border-t border-line pt-8">
           <Link
             href="/notes"
-            className="label text-ash transition-colors hover:text-ink"
+            className="label inline-flex min-h-10 items-center text-ash transition-colors hover:text-ink"
           >
             ← All news
           </Link>

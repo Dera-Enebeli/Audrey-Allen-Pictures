@@ -126,7 +126,7 @@ export function SiteHeader() {
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
                 onClick={() => setOpen((v) => !v)}
-                className="md:hidden"
+                className="flex h-11 w-11 items-center justify-center md:hidden"
               >
                 {open ? (
                   <CloseIcon className="h-6 w-6" />
@@ -168,7 +168,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="label text-ash transition-colors hover:text-ink"
+                className="label inline-flex min-h-10 items-center text-ash transition-colors hover:text-ink"
               >
                 {item.label}
               </Link>
@@ -182,7 +182,7 @@ export function SiteHeader() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label text-ash transition-colors hover:text-ink"
+                className="label inline-flex min-h-10 min-w-10 items-center justify-center text-ash transition-colors hover:text-ink"
               >
                 {s.label}
               </a>

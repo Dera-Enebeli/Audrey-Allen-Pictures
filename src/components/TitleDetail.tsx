@@ -212,7 +212,10 @@ export function TitleDetail({
       )}
 
       <Container className="pb-20">
-        <Link href={kind === "series" ? "/series" : "/films"} className="label text-ash hover:text-ink">
+        <Link
+          href={kind === "series" ? "/series" : "/films"}
+          className="label inline-flex min-h-10 items-center text-ash hover:text-ink"
+        >
           ← Back to {kind === "series" ? "Series" : "Films"}
         </Link>
       </Container>

@@ -40,7 +40,7 @@ export default function HomePage() {
         <Container className="max-w-3xl mx-auto">
           {/* LOGO.mp4 is portrait 3:4 — frame it at its native ratio so
               the whole animation stays visible */}
-          <div className="relative mx-auto mb-8 aspect-[3/4] w-[300px] overflow-hidden sm:w-[360px]">
+          <div className="relative mx-auto mb-8 aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
             <Media
               video="/media/brand/LOGO.mp4"
               alt="Audrey Allen Pictures Brand Logo"

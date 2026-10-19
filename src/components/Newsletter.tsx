@@ -57,7 +57,7 @@ export function Newsletter() {
                   />
                   <button
                     type="submit"
-                    className="inline-flex shrink-0 items-center gap-2 bg-ink px-5 py-2.5 font-sans text-[0.875rem] font-medium uppercase leading-none tracking-[0.01em] text-paper transition-colors hover:bg-white"
+                    className="inline-flex min-h-10 shrink-0 items-center gap-2 bg-ink px-5 font-sans text-[0.875rem] font-medium uppercase leading-none tracking-[0.01em] text-paper transition-colors hover:bg-white"
                   >
                     Sign up
                     <ArrowRight className="h-3.5 w-3.5" />

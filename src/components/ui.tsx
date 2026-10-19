@@ -8,7 +8,7 @@ type ButtonSize = "sm" | "md" | "lg";
 /* A24 buttons: uppercase sans, square corners, 1px border that fills in
    (and flips the label) on hover. Sizes track their small/medium/lg. */
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-4 text-[0.875rem]",
+  sm: "h-10 px-4 text-[0.875rem]",
   md: "h-11 px-5 text-[0.9375rem]",
   lg: "h-12 px-6 text-[1rem]",
 };

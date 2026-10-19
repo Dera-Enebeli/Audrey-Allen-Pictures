@@ -16,7 +16,7 @@ export function Logo({
     <Link
       href="/"
       aria-label={`${site.brand.name} — home`}
-      className={`group inline-flex items-baseline gap-2 ${className}`}
+      className={`group inline-flex items-baseline gap-2 py-3 ${className}`}
     >
       <span
         className="font-sans text-[1.0625rem] font-medium uppercase leading-none tracking-[-0.02em] sm:text-[1.1875rem]"

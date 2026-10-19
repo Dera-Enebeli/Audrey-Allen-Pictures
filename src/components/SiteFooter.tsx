@@ -31,7 +31,7 @@ export function SiteFooter() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="label text-ash transition-colors hover:text-ink"
+                    className="label inline-flex min-h-10 min-w-10 items-center justify-center text-ash transition-colors hover:text-ink"
                   >
                     {s.label}
                   </a>
@@ -49,7 +49,7 @@ export function SiteFooter() {
                     <li key={l.label}>
                       <Link
                         href={l.href}
-                        className="text-[1.35rem] font-medium leading-tight tracking-[-0.01em] text-ink/85 transition-colors hover:text-ink sm:text-[1.5rem]"
+                        className="inline-block min-w-10 py-2 text-[1.35rem] font-medium leading-tight tracking-[-0.01em] text-ink/85 transition-colors hover:text-ink sm:text-[1.5rem]"
                       >
                         {l.label}
                       </Link>
@@ -72,13 +72,13 @@ export function SiteFooter() {
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <Link
                 href="/terms"
-                className="label text-ash transition-colors hover:text-ink"
+                className="label inline-flex min-h-10 items-center text-ash transition-colors hover:text-ink"
               >
                 Terms of Use
               </Link>
               <Link
                 href="/privacy"
-                className="label text-ash transition-colors hover:text-ink"
+                className="label inline-flex min-h-10 items-center text-ash transition-colors hover:text-ink"
               >
                 Privacy Policy
               </Link>
