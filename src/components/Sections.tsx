@@ -213,7 +213,7 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
     <section className="border-t border-line py-16 sm:py-24">
       <Container>
         <SectionHeading label="In Development" title="Upcoming" />
-        <div className="mt-9 grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-6">
+        <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-6">
           {items.map((p) => (
             <div key={p.slug} className="group">
               <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
