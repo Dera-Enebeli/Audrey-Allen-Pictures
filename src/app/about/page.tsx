@@ -22,36 +22,16 @@ export default function AboutPage() {
           <p className="mt-4 label text-ash">
             International Film, Television &amp; Entertainment Production Company
           </p>
-          <div className="relative mt-12 aspect-[16/7] w-full overflow-hidden bg-smoke">
+          {/* LOGO.mp4 is portrait 3:4 — native-ratio frame, no cropping */}
+          <div className="relative mt-12 aspect-[3/4] w-full max-w-[480px] mx-auto overflow-hidden">
             <Media
-              src={studio.image}
-              alt="Audrey Allen Pictures"
+              video="/media/brand/LOGO.mp4"
+              alt="Audrey Allen Pictures Brand Intro"
               accent={studio.accent}
               title="Audrey Allen Pictures"
               label="Company Profile"
+              priority
             />
-          </div>
-        </Container>
-      </section>
-      {/* brand video intro */}
-      <section id="brand-intro" className="py-12 sm:py-20 border-t border-line bg-smoke">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            {/* LOGO.mp4 is portrait 3:4 — native-ratio frame, no cropping */}
-            <div className="relative mx-auto mb-8 aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
-              <Media
-                video="/media/brand/LOGO.mp4"
-                alt="Audrey Allen Pictures Brand Intro"
-                accent={studio.accent}
-                title={site.brand.shortName}
-                label="Brand"
-              />
-            </div>
-            <h2 className="label text-ash">Audrey Allen Pictures</h2>
-            <p className="mt-4 text-[0.95rem] text-ink/70 leading-relaxed">
-              Celebrating over a decade of bringing African stories to the world through
-              innovative filmmaking and entertainment.
-            </p>
           </div>
         </Container>
       </section>
