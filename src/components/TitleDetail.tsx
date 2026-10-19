@@ -159,6 +159,19 @@ export function TitleDetail({
                   the novel by {series.basedOn.author}, bringing its world,
                   characters and conflicts to the screen for the first time.
                 </p>
+                {series.basedOn.synopsis && (
+                  <details className="mt-8 group">
+                    <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none group-hover:text-ash transition-colors">
+                      <span>About the novel</span>
+                      <span className="ml-auto transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+                    </summary>
+                    <div className="mt-6 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
+                      {series.basedOn.synopsis.split('\n\n').map((para, i) => (
+                        <p key={i} className="mb-4">{para}</p>
+                      ))}
+                    </div>
+                  </details>
+                )}
               </div>
             </div>
           </Container>
