@@ -5,16 +5,19 @@ import { ArrowUpRight } from "./Icons";
 type ButtonVariant = "solid" | "outline" | "light" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
+/* A24 buttons: uppercase sans, square corners, 1px border that fills in
+   (and flips the label) on hover. Sizes track their small/medium/lg. */
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-4 text-[0.7rem]",
-  md: "h-11 px-6 text-[0.72rem]",
-  lg: "h-12 px-7 text-[0.74rem]",
+  sm: "h-9 px-4 text-[0.875rem]",
+  md: "h-11 px-5 text-[0.9375rem]",
+  lg: "h-12 px-6 text-[1rem]",
 };
 
 const variants: Record<ButtonVariant, string> = {
-  solid: "bg-ink text-paper hover:bg-ink/85",
-  outline: "border border-line text-ink hover:border-ink",
-  light: "bg-paper text-ink hover:bg-paper/85",
+  solid: "border border-ink text-ink hover:bg-ink hover:text-paper",
+  outline:
+    "border border-line text-ink hover:border-ink hover:bg-ink hover:text-paper",
+  light: "border border-white/60 text-white hover:bg-white hover:text-paper",
   ghost: "text-ink hover:opacity-60",
 };
 
@@ -35,7 +38,7 @@ export function Button({
   icon?: boolean;
   external?: boolean;
 }) {
-  const cls = `label inline-flex items-center justify-center gap-2 rounded-full transition-colors duration-300 ${sizes[size]} ${variants[variant]} ${className}`;
+  const cls = `inline-flex items-center justify-center gap-2 font-sans font-medium uppercase leading-none tracking-[0.01em] transition-colors duration-300 ${sizes[size]} ${variants[variant]} ${className}`;
   const inner = (
     <>
       {children}
@@ -56,7 +59,7 @@ export function Button({
   );
 }
 
-/** Small status pill used on posters and detail pages. */
+/** Small status chip used on detail heroes. */
 export function StatusBadge({
   status,
   releaseLabel,
@@ -72,14 +75,15 @@ export function StatusBadge({
       ? "bg-paper/90 text-ink backdrop-blur"
       : "bg-ink/90 text-paper backdrop-blur";
   return (
-    <span
-      className={`label rounded-full px-3 py-1.5 text-[0.6rem] ${cls}`}
-    >
-      {label}
-    </span>
+    <span className={`label inline-block px-3 py-1.5 ${cls}`}>{label}</span>
   );
 }
 
+/**
+ * Section head in the A24 tier-heading pattern: a full-strength rule across
+ * the top, mono eyebrow over a large tight-tracked title, and an eyebrow link
+ * with an arrow parked on the right.
+ */
 export function SectionHeading({
   label,
   title,
@@ -95,17 +99,20 @@ export function SectionHeading({
   className?: string;
   tone?: "ink" | "paper";
 }) {
-  const dim = tone === "paper" ? "text-white/60" : "text-ash";
+  const dim = tone === "paper" ? "text-white/70" : "text-ash";
   const strong = tone === "paper" ? "text-white" : "text-ink";
-  const rule = tone === "paper" ? "border-white/20" : "border-line";
+  const rule = tone === "paper" ? "border-white/70" : "border-ink";
+  const link = tone === "paper"
+    ? "text-white/80 hover:text-white"
+    : "text-ash hover:text-ink";
   return (
     <div
-      className={`flex items-end justify-between gap-6 border-t pt-5 ${rule} ${className}`}
+      className={`flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-t pt-4 sm:pt-5 ${rule} ${className}`}
     >
-      <div>
-        {label && <p className={`label mb-3 ${dim}`}>{label}</p>}
+      <div className="min-w-0">
+        {label && <p className={`label ${dim}`}>{label}</p>}
         <h2
-          className={`font-sans text-[1.75rem] font-medium leading-[0.98] tracking-[-0.03em] sm:text-[2.25rem] ${strong}`}
+          className={`mt-2.5 font-sans text-[clamp(2rem,5vw,3.5rem)] font-medium leading-[1.04] tracking-[-0.018em] ${strong}`}
         >
           {title}
         </h2>
@@ -113,10 +120,10 @@ export function SectionHeading({
       {href && (
         <Link
           href={href}
-          className={`label group hidden shrink-0 items-center gap-2 pb-1 sm:inline-flex ${strong}`}
+          className={`label group hidden shrink-0 items-center gap-1.5 pb-1.5 transition-colors sm:inline-flex ${link}`}
         >
           {hrefLabel}
-          <ArrowUpRight className="h-[0.85rem] w-[0.85rem] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       )}
     </div>

@@ -2,7 +2,14 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { Container } from "./ui";
 import { Logo } from "./Logo";
+import { Newsletter } from "./Newsletter";
+import { Membership } from "./Membership";
 
+/**
+ * Footer follows a24films.com's order: link sets (big sans links, hairline
+ * column rule), then the subscribe block, then the membership upsell under a
+ * full-strength rule, then the mono copyright bar with legal links.
+ */
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-paper" aria-label="Site footer">
@@ -10,7 +17,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo />
-            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-ink/70">
+            <p className="mt-5 max-w-xs leading-relaxed text-ink/70">
               {site.brand.tagline}
             </p>
             <p className="label mt-6 text-ash">
@@ -33,16 +40,16 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8 lg:border-l lg:border-line lg:pl-10">
             {site.footer.columns.map((col) => (
               <div key={col.title}>
                 <h3 className="label text-ash">{col.title}</h3>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-5 space-y-3.5">
                   {col.links.map((l) => (
                     <li key={l.label}>
                       <Link
                         href={l.href}
-                        className="text-[0.95rem] text-ink/80 transition-colors hover:text-ink"
+                        className="text-[1.35rem] font-medium leading-tight tracking-[-0.01em] text-ink/85 transition-colors hover:text-ink sm:text-[1.5rem]"
                       >
                         {l.label}
                       </Link>
@@ -53,20 +60,31 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
+      </Container>
 
-        {/* oversized ghost wordmark */}
-        <div className="mt-16 select-none overflow-hidden">
-          <p
-            aria-hidden
-            className="whitespace-nowrap font-sans text-[15vw] font-medium leading-[0.78] tracking-[-0.05em] text-ink/[0.07]"
-          >
-            {site.brand.shortName}
-          </p>
-        </div>
+      <Newsletter />
+      <Membership />
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="label text-ash">{site.footer.copyright}</p>
-          <p className="label max-w-md text-ash sm:text-right">
+      <Container>
+        <div className="border-t border-ink py-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="label text-ash">{site.footer.copyright}</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <Link
+                href="/terms"
+                className="label text-ash transition-colors hover:text-ink"
+              >
+                Terms of Use
+              </Link>
+              <Link
+                href="/privacy"
+                className="label text-ash transition-colors hover:text-ink"
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
+          <p className="label mt-4 max-w-2xl leading-[1.6] text-ash">
             {site.footer.disclaimer}
           </p>
         </div>

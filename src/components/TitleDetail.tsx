@@ -3,7 +3,7 @@ import type { Film, MediaEntry, Series } from "@/lib/content";
 import { genreLabel } from "@/lib/content";
 import { Rail } from "./Rail";
 import { Media } from "./Media";
-import { PosterCard } from "./cards";
+import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
 import { PlayIcon, TicketIcon } from "./Icons";
@@ -32,7 +32,7 @@ export function TitleDetail({
   return (
     <div>
       {/* hero */}
-      <section className="relative h-[78svh] min-h-[520px] w-full overflow-hidden bg-ink">
+      <section className="relative h-[78svh] min-h-[520px] w-full overflow-hidden bg-paper">
         <Backdrop
           poster={item.poster}
           backdrop={item.backdrop}
@@ -202,6 +202,7 @@ export function TitleDetail({
                     item={f}
                     href={`/films/${f.slug}`}
                     kind="film"
+                    className={railCell}
                   />
                 ))}
               </Rail>
@@ -234,7 +235,7 @@ function MediaRail({
       {entries.map((entry, i) => (
         <div
           key={entry.src ?? entry.video ?? i}
-          className="w-[220px] shrink-0 snap-start sm:w-[260px]"
+          className={`w-[220px] shrink-0 snap-start sm:w-[260px] ${railCell}`}
         >
           <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
             <Media

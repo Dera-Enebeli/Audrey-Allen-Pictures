@@ -90,13 +90,7 @@ export const site = {
           { label: "Investors & Sponsors", href: "/about#contact" },
         ],
       },
-      {
-        title: "Legal",
-        links: [
-          { label: "Terms of Use", href: "/terms" },
-          { label: "Privacy Policy", href: "/privacy" },
-        ],
-      },
+      // Legal links live in the copyright bar, as on a24films.com.
     ],
 
     /** TODO: point each link at the studio's real profiles. */

@@ -32,7 +32,7 @@ export function CatalogueGrid({
               <button
                 key={s}
                 onClick={() => setFilter(s)}
-                className={`label rounded-full px-4 py-2 text-[0.62rem] transition-colors ${
+                className={`label px-4 py-2 text-[0.62rem] transition-colors ${
                   on
                     ? "bg-ink text-paper"
                     : "text-ash hover:text-ink"

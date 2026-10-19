@@ -1,10 +1,22 @@
 import Link from "next/link";
 import type { Film, Series } from "@/lib/content";
-import { genreLabel } from "@/lib/content";
 import { Media } from "./Media";
-import { StatusBadge } from "./ui";
+import { Button } from "./ui";
 
-/** Portrait poster card — used in rails and grids across the site. */
+/**
+ * Ruled-column cell for horizontal rails: a right hairline with matching
+ * padding so cards read as bordered table cells (the a24films.com carousel
+ * pattern). Pair with Rail's gap so the rule sits midway between posters.
+ */
+export const railCell =
+  "border-r border-line pr-4 last:border-r-0 sm:pr-5";
+
+/**
+ * Portrait poster card — A24's cell layout: 2:3 art with an inset hairline,
+ * mono status eyebrow, a muted display title that brightens on hover, and a
+ * small uppercase CTA. Whole card links via the title/art; the CTA is a
+ * sibling link (no nested anchors).
+ */
 export function PosterCard({
   item,
   href,
@@ -18,35 +30,32 @@ export function PosterCard({
   className?: string;
   width?: string;
 }) {
-  const meta = genreLabel(item);
+  void kind;
+  const cta = item.status === "In Cinemas" ? "Get Tickets" : "Details";
   return (
-    <Link
-      href={href}
-      className={`group block shrink-0 snap-start ${width} ${className}`}
-    >
-      <div className="relative aspect-[2/3] overflow-hidden bg-smoke">
-        <Media
-          src={item.poster}
-          alt={item.title}
-          accent={item.accent}
-          title={item.title}
-          label={item.status}
-          imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-        />
-        <div className="absolute left-3 top-3">
-          <StatusBadge
-            status={item.status}
-            releaseLabel={(item as Film).releaseLabel}
+    <div className={`shrink-0 snap-start ${width} ${className}`}>
+      <Link href={href} className="group block">
+        <span className="relative block aspect-[2/3] overflow-hidden bg-smoke ring-1 ring-inset ring-white/15">
+          <Media
+            src={item.poster}
+            alt={item.title}
+            accent={item.accent}
+            title={item.title}
+            label={item.status}
+            imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
           />
-        </div>
-      </div>
-      <div className="mt-3 flex items-baseline justify-between gap-3">
-        <h3 className="font-sans text-[1.0625rem] font-medium leading-tight tracking-[-0.01em]">
+        </span>
+        <span className="label mt-4 flex items-center text-ash transition-colors group-hover:text-ink">
+          {item.status}
+          <span className="ml-1.5 h-1 w-1 rounded-full bg-ash" />
+        </span>
+        <span className="mt-2.5 block font-sans text-[1.35rem] font-medium leading-[1.08] tracking-[-0.005em] text-ash transition-colors group-hover:text-ink sm:text-[1.5rem]">
           {item.title}
-        </h3>
-        <span className="label shrink-0 text-ash tabular-nums">{item.year}</span>
-      </div>
-      <p className="label mt-1.5 text-ash">{kind === "series" ? (item as Series).seasonLabel : meta}</p>
-    </Link>
+        </span>
+      </Link>
+      <Button href={href} size="sm" variant="outline" className="mt-4">
+        {cta}
+      </Button>
+    </div>
   );
 }

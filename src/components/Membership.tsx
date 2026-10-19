@@ -4,7 +4,10 @@ import { Monogram } from "./Logo";
 
 export function Membership() {
   return (
-    <section id="membership" className="scroll-mt-20 bg-ink py-16 text-paper sm:py-24">
+    <section
+      id="membership"
+      className="scroll-mt-20 border-t border-ink bg-smoke py-16 sm:py-24"
+    >
       <Container>
         <div className="grid items-end gap-10 lg:grid-cols-12">
           <div className="lg:col-span-8">

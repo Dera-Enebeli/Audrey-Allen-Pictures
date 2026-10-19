@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0e0e0d",
 };
 
 export default function RootLayout({
@@ -31,16 +31,23 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/*
-          Typography. Fontshare serves open-licensed grotesques that sit close
-          to the reference look. Drop your own licensed files in /public/fonts
-          and swap the @font-face rules in globals.css if you prefer. The
-          system fallback (Helvetica/Arial) is intentionally on-brand.
+          Type: PP Neue Montreal + Mono, self-hosted from /public/fonts (the
+          exact family pair a24films.com ships). Preload both so first paint
+          isn't fallback text.
         */}
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
         <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&f[]=chivo-mono@400,500&display=swap"
+          rel="preload"
+          href="/fonts/PPNeueMontreal_Variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/PPNeueMontrealMono_Variable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body>

@@ -3,7 +3,7 @@ import type { Film, NewsItem } from "@/lib/content";
 import { activities, genreLabel, studio } from "@/lib/content";
 import { Media } from "./Media";
 import { Backdrop } from "./Backdrop";
-import { Button, Container, SectionHeading, StatusBadge } from "./ui";
+import { Button, Container, SectionHeading } from "./ui";
 import { ArrowUpRight, PlayIcon, TicketIcon } from "./Icons";
 
 /* ------------------------------- Feature -------------------------------- */
@@ -34,13 +34,6 @@ export function Feature({ film }: { film: Film }) {
                 label={film.status}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-80" />
-              <div className="absolute left-4 top-4">
-                <StatusBadge
-                  status={film.status}
-                  releaseLabel={film.releaseLabel}
-                  tone="paper"
-                />
-              </div>
               <div className="absolute bottom-5 left-5 flex items-center gap-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 {film.trailer && (
                   <>
@@ -75,9 +68,11 @@ export function Feature({ film }: { film: Film }) {
                 {showing && <TicketIcon className="h-[0.9rem] w-[0.9rem]" />}
                 {showing ? "Buy Tickets" : "Learn More"}
               </Button>
-              <Button href={`/films/${film.slug}`} variant="outline" size="lg">
-                Details
-              </Button>
+              {film.trailer && (
+                <Button href={film.trailer} external variant="outline" size="lg">
+                  Watch Trailer
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -169,7 +164,7 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
   return (
     <section className="border-t border-line py-16 sm:py-24">
       <Container>
-        <SectionHeading label="Notes" title="Studio News" href="/notes" />
+        <SectionHeading label="Latest" title="Notes" href="/notes" />
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((n) => (
             <Link key={n.slug} href={`/notes/${n.slug}`} className="group block">

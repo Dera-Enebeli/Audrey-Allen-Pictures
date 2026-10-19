@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Button, Container, SectionHeading } from "@/components/ui";
 import { Media } from "@/components/Media";
-import { Membership } from "@/components/Membership";
 import { activities, partners, studio } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -38,7 +37,8 @@ export default function AboutPage() {
       <section id="brand-intro" className="py-12 sm:py-20 border-t border-line bg-smoke">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <div className="relative mx-auto mb-8 h-[300px] w-full overflow-hidden rounded-xl">
+            {/* LOGO.mp4 is portrait 3:4 — native-ratio frame, no cropping */}
+            <div className="relative mx-auto mb-8 aspect-[3/4] w-[300px] overflow-hidden sm:w-[360px]">
               <Media
                 video="/media/brand/LOGO.mp4"
                 alt="Audrey Allen Pictures Brand Intro"
@@ -191,8 +191,6 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-
-      <Membership />
     </div>
   );
 }

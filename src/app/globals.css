@@ -1,23 +1,42 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
-   A24-inspired design tokens.
-   The current stack (Switzer + Chivo Mono) is loaded from Fontshare in
-   layout.tsx. To self-host instead: drop .woff2 files in /public/fonts,
-   add @font-face rules above, and name the families in --font-sans /
-   --font-mono below.
+   A24 design system.
+   Type: PP Neue Montreal + PP Neue Montreal Mono (variable), self-hosted
+   from /public/fonts — the exact pair a24films.com ships. Pangram Pangram
+   typefaces are commercially licensed: confirm your licence covers
+   production use, or swap the src URLs for your own files.
+   Palette: A24's warm-neutral scale, dark-first (#0e0e0d canvas).
  * ------------------------------------------------------------------ */
-@theme {
-  --font-sans: "A24 Sans", "PP Neue Montreal", "Switzer", "Helvetica Neue",
-    Helvetica, Arial, sans-serif;
-  --font-mono: "A24 Mono", "PP Neue Montreal Mono", "Chivo Mono",
-    ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --color-ink: #0a0a0a;
-  --color-paper: #ffffff;
-  --color-smoke: #f3f2ee;
-  --color-ash: #8c8c86;
-  --color-line: #e4e3de;
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal_Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Mono";
+  src: url("/fonts/PPNeueMontrealMono_Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "PP Neue Montreal", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-mono: "PP Neue Montreal Mono", ui-monospace, "SFMono-Regular", Menlo,
+    monospace;
+
+  /* warm-neutral-50 / -1000 / -975 / -650 + border-default @18% */
+  --color-ink: #f2f0ed;
+  --color-paper: #0e0e0d;
+  --color-smoke: #141313;
+  --color-ash: #9c9791;
+  --color-line: rgba(242, 240, 237, 0.18);
 
   --animate-marquee: marquee 34s linear infinite;
   --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -72,11 +91,12 @@
   }
 }
 
-/* Small-caps mono label used all over the A24 chrome */
+/* Uppercase mono eyebrow — A24's chrome label (10px, tight tracking) */
 @utility label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   line-height: 1;
 }

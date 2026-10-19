@@ -69,10 +69,11 @@ public/media/news/<slug>.jpg    article image for the matching news slug
   SVG at `public/media/brand/logo.svg`.
 - **Brand video**: `public/media/brand/LOGO.mp4` plays on the homepage and the
   Studio page.
-- **Fonts**: to self-host, drop `.woff2` files in `public/fonts`, add
-  `@font-face` rules at the top of `src/app/globals.css`, and name the families
-  in `--font-sans` / `--font-mono` (the Fontshare `<link>` in `layout.tsx` can
-  then be removed).
+- **Fonts**: PP Neue Montreal + PP Neue Montreal Mono (variable) are
+  self-hosted at `public/fonts/*.woff2`, declared at the top of
+  `src/app/globals.css`. Swap the `.woff2` files and their `@font-face` `src`
+  URLs if you change typefaces — remember to confirm the Pangram Pangram
+  licence covers your use before shipping.
 
 ## Adding more titles later
 Edit `src/lib/content.ts` — add an entry with a `slug`, then create the matching

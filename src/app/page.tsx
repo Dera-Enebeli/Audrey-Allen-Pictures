@@ -8,10 +8,9 @@ import {
   MissionTeaser,
   NewsSection,
 } from "@/components/Sections";
-import { Newsletter } from "@/components/Newsletter";
-import { Membership } from "@/components/Membership";
 import { Container, SectionHeading } from "@/components/ui";
 import { Media } from "@/components/Media";
+import { railCell } from "@/components/cards";
 import { films, heroSlides, news, series } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -37,9 +36,11 @@ export default function HomePage() {
       />
 
       {/* brand logo video in the middle of the landing page */}
-      <section id="brand-logo" className="py-12 sm:py-20 bg-gradient-to-b from-ink via-ink/10 to-ink/5">
+      <section id="brand-logo" className="border-t border-line py-12 sm:py-20">
         <Container className="max-w-3xl mx-auto">
-          <div className="relative mb-8 h-[300px] w-full overflow-hidden rounded-xl">
+          {/* LOGO.mp4 is portrait 3:4 — frame it at its native ratio so
+              the whole animation stays visible */}
+          <div className="relative mx-auto mb-8 aspect-[3/4] w-[300px] overflow-hidden sm:w-[360px]">
             <Media
               video="/media/brand/LOGO.mp4"
               alt="Audrey Allen Pictures Brand Logo"
@@ -62,11 +63,7 @@ export default function HomePage() {
       {/* Our Productions */}
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
-          <SectionHeading
-            label="The Slate"
-            title="Our Productions"
-            href="/films"
-          />
+          <SectionHeading label="The Slate" title="Films" href="/films" />
           <div className="mt-9">
             <Rail>
               {films.map((f) => (
@@ -75,6 +72,7 @@ export default function HomePage() {
                   item={f}
                   href={`/films/${f.slug}`}
                   kind="film"
+                  className={railCell}
                 />
               ))}
             </Rail>
@@ -87,11 +85,7 @@ export default function HomePage() {
       {/* Series */}
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
-          <SectionHeading
-            label="Television"
-            title="Series & Original Programming"
-            href="/series"
-          />
+          <SectionHeading label="Television" title="Series" href="/series" />
           <div className="mt-9">
             <Rail>
               {series.map((s) => (
@@ -100,6 +94,7 @@ export default function HomePage() {
                   item={s}
                   href={`/series/${s.slug}`}
                   kind="series"
+                  className={railCell}
                 />
               ))}
             </Rail>
@@ -109,8 +104,6 @@ export default function HomePage() {
 
       <MissionTeaser />
       <NewsSection items={news} />
-      <Newsletter />
-      <Membership />
     </>
   );
 }
