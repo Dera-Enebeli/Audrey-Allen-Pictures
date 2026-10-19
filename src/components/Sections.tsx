@@ -237,10 +237,10 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
                 {p.title}
               </h3>
               {p.synopsis && (
-                <details className="mt-4 group">
-                  <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none group-hover:text-ash transition-colors">
+                <details className="mt-4">
+                  <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
                     <span>Synopsis</span>
-                    <span className="ml-auto transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                   </summary>
                   <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
                     {p.synopsis.split('\n\n').map((para, i) => (

@@ -109,6 +109,17 @@
   }
 }
 
+/* Details/summary arrow rotation for upcoming project synopses */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+details[open] summary .arrow-rotate {
+  transform: rotate(90deg);
+}
+
 /* Honour the OS "reduce motion" setting: stop the marquee, bounce and
    entrance animations, and collapse transitions. */
 @media (prefers-reduced-motion: reduce) {
