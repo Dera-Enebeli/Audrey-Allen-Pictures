@@ -236,6 +236,19 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
               <h3 className="mt-2 font-sans text-[1.15rem] font-medium leading-tight tracking-[-0.01em]">
                 {p.title}
               </h3>
+              {p.synopsis && (
+                <details className="mt-4 group">
+                  <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none group-hover:text-ash transition-colors">
+                    <span>Synopsis</span>
+                    <span className="ml-auto transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+                  </summary>
+                  <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
+                    {p.synopsis.split('\n\n').map((para, i) => (
+                      <p key={i} className="mb-4">{para}</p>
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
           ))}
         </div>
