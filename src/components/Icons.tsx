@@ -86,6 +86,14 @@ export function ChevronRight(p: IconProps) {
   );
 }
 
+export function ChevronUp(p: IconProps) {
+  return (
+    <svg {...base} {...p}>
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  );
+}
+
 export function PlayIcon(p: IconProps) {
   return (
     <svg {...base} {...p} fill="currentColor" stroke="none">
