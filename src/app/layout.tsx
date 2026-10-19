@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(site.url),
   title: {
     default: site.seo.title,
     template: `%s — ${site.brand.name}`,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { site } from "@/lib/site";
 import { Container } from "./ui";
 import { ArrowRight } from "./Icons";
@@ -63,7 +64,22 @@ export function Newsletter() {
                   </button>
                 </div>
                 <p className="mt-4 max-w-lg text-[0.78rem] leading-relaxed text-ash">
-                  {site.newsletter.consent}
+                  By providing my email, I agree to receive {site.brand.name}{" "}
+                  promotional materials and have read and agree to the{" "}
+                  <Link
+                    href="/terms"
+                    className="underline underline-offset-2 hover:text-ink"
+                  >
+                    Terms of Use
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="/privacy"
+                    className="underline underline-offset-2 hover:text-ink"
+                  >
+                    Privacy Policy
+                  </Link>
+                  .
                 </p>
               </form>
             )}

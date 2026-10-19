@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { Film, Series } from "@/lib/content";
+import type { Film, MediaEntry, Series } from "@/lib/content";
 import { genreLabel } from "@/lib/content";
 import { Rail } from "./Rail";
+import { Media } from "./Media";
 import { PosterCard } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
@@ -10,7 +11,7 @@ import { PlayIcon, TicketIcon } from "./Icons";
 type Title = Film | Series;
 
 function isFilm(t: Title): t is Film {
-  return (t as Film).director !== undefined || !("seasonLabel" in t);
+  return !("seasonLabel" in t);
 }
 
 export function TitleDetail({
@@ -22,11 +23,14 @@ export function TitleDetail({
   kind: "film" | "series";
   related: Film[];
 }) {
-  const film = isFilm(item) ? (item as Film) : null;
-  const series = !film ? (item as Series) : null;
+  const film = isFilm(item) ? item : null;
+  const series = film ? null : (item as Series);
+  const trailer = "trailer" in item ? item.trailer : undefined;
+  const cast = "cast" in item ? item.cast : undefined;
+  const gallery = film?.gallery;
 
   return (
-    <main>
+    <div>
       {/* hero */}
       <section className="relative h-[78svh] min-h-[520px] w-full overflow-hidden bg-ink">
         <Backdrop
@@ -56,18 +60,23 @@ export function TitleDetail({
             )}
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Button href="#where" variant="light" size="lg">
-                <TicketIcon className="h-[0.9rem] w-[0.9rem]" />
+                {item.status === "In Cinemas" ? (
+                  <TicketIcon className="h-[0.9rem] w-[0.9rem]" />
+                ) : null}
                 {item.status === "In Cinemas" ? "Buy Tickets" : "Get Updates"}
               </Button>
-              <Button
-                href="#"
-                variant="outline"
-                size="lg"
-                className="border-white/40 text-white hover:border-white"
-              >
-                <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
-                Watch Trailer
-              </Button>
+              {trailer && (
+                <Button
+                  href={trailer}
+                  external
+                  variant="outline"
+                  size="lg"
+                  className="border-white/40 text-white hover:border-white"
+                >
+                  <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
+                  Watch Trailer
+                </Button>
+              )}
             </div>
           </div>
         </Container>
@@ -103,8 +112,9 @@ export function TitleDetail({
               <div className="mt-9 border-t border-line pt-7">
                 <h3 className="label text-ash">Where to watch</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">
-                  Available in cinemas and on select streaming platforms.
-                  Check your local listings for showtimes.
+                  {item.status === "In Cinemas"
+                    ? "Available in cinemas and on select streaming platforms. Check your local listings for showtimes."
+                    : "Release details are still being finalised. Subscribe to the newsletter or get in touch to hear when this title lands."}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Button href="/about#contact" size="md">
@@ -119,6 +129,65 @@ export function TitleDetail({
           </div>
         </Container>
       </section>
+
+      {/* based on the book */}
+      {series?.basedOn && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-4">
+                <div className="relative aspect-[3/4] w-full max-w-[280px] overflow-hidden bg-smoke">
+                  <Media
+                    src={series.basedOn.cover}
+                    alt={`Cover of ${series.basedOn.title}`}
+                    accent={series.accent}
+                    title={series.basedOn.title}
+                    label="The book"
+                  />
+                </div>
+              </div>
+              <div className="lg:col-span-8">
+                <p className="label text-ash">Based on the book</p>
+                <h2 className="mt-5 font-sans text-[1.9rem] font-medium leading-[1.02] tracking-[-0.025em] sm:text-[2.5rem]">
+                  {series.basedOn.title}
+                </h2>
+                <p className="mt-3 text-[1.05rem] text-ash">
+                  by {series.basedOn.author}
+                </p>
+                <p className="mt-6 max-w-prose leading-relaxed text-ink/75">
+                  {series.title} begins on the page. The series is adapted from
+                  the novel by {series.basedOn.author}, bringing its world,
+                  characters and conflicts to the screen for the first time.
+                </p>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* cast */}
+      {cast && cast.length > 0 && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label="Ensemble" title="Cast" />
+            <div className="mt-9">
+              <MediaRail entries={cast} accent={item.accent} fallbackTitle={item.title} />
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* gallery */}
+      {gallery && gallery.length > 0 && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label="From the set" title="Stills" />
+            <div className="mt-9">
+              <MediaRail entries={gallery} accent={item.accent} fallbackTitle={item.title} />
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* related */}
       {related.length > 0 && (
@@ -146,7 +215,41 @@ export function TitleDetail({
           ← Back to {kind === "series" ? "Series" : "Films"}
         </Link>
       </Container>
-    </main>
+    </div>
+  );
+}
+
+/** Horizontal rail of portrait media tiles (photos or looping clips). */
+function MediaRail({
+  entries,
+  accent,
+  fallbackTitle,
+}: {
+  entries: MediaEntry[];
+  accent: string;
+  fallbackTitle: string;
+}) {
+  return (
+    <Rail>
+      {entries.map((entry, i) => (
+        <div
+          key={entry.src ?? entry.video ?? i}
+          className="w-[220px] shrink-0 snap-start sm:w-[260px]"
+        >
+          <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
+            <Media
+              src={entry.src}
+              video={entry.video}
+              alt={entry.alt}
+              accent={accent}
+              title={fallbackTitle}
+              label={entry.video ? "Watch" : "Cast"}
+              imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
+            />
+          </div>
+        </div>
+      ))}
+    </Rail>
   );
 }
 

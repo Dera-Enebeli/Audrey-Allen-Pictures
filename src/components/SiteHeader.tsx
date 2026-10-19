@@ -5,13 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { Logo } from "./Logo";
-import {
-  BagIcon,
-  CloseIcon,
-  MenuIcon,
-  SearchIcon,
-  UserIcon,
-} from "./Icons";
+import { BagIcon, CloseIcon, MenuIcon, UserIcon } from "./Icons";
 
 /** Pages whose hero sits on a dark image — the header starts light there. */
 function isOverlayRoute(pathname: string) {
@@ -42,9 +36,13 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  // Close the mobile menu on navigation — adjust state during render rather
+  // than in an effect (see react.dev "You Might Not Need an Effect").
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -110,12 +108,9 @@ export function SiteHeader() {
               className="flex items-center gap-4"
               style={{ color: tone === "paper" ? "#fff" : "var(--color-ink)" }}
             >
-              <button aria-label="Search" className="transition-opacity hover:opacity-55">
-                <SearchIcon className="h-[1.15rem] w-[1.15rem]" />
-              </button>
               <Link
                 href="/#membership"
-                aria-label="Account"
+                aria-label="The Club"
                 className="hidden transition-opacity hover:opacity-55 sm:block"
               >
                 <UserIcon className="h-[1.15rem] w-[1.15rem]" />
@@ -185,6 +180,8 @@ export function SiteHeader() {
               <a
                 key={s.label}
                 href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="label text-ash transition-colors hover:text-ink"
               >
                 {s.label}

@@ -21,6 +21,8 @@ export function Hero({ slides }: { slides: Film[] }) {
 
   useEffect(() => {
     if (paused || count <= 1) return;
+    // Respect users who ask their OS for less motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setTimeout(() => go(active + 1), DURATION);
     return () => clearTimeout(t);
   }, [active, paused, count, go]);
@@ -82,15 +84,18 @@ export function Hero({ slides }: { slides: Film[] }) {
               >
                 {slide.status === "In Cinemas" ? "Buy Tickets" : "Learn More"}
               </Button>
-              <Button
-                href={`/films/${slide.slug}`}
-                variant="outline"
-                size="lg"
-                className="border-white/40 text-white hover:border-white"
-              >
-                <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
-                Watch Trailer
-              </Button>
+              {slide.trailer && (
+                <Button
+                  href={slide.trailer}
+                  external
+                  variant="outline"
+                  size="lg"
+                  className="border-white/40 text-white hover:border-white"
+                >
+                  <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
+                  Watch Trailer
+                </Button>
+              )}
             </div>
           </div>
         </Container>
@@ -120,7 +125,7 @@ export function Hero({ slides }: { slides: Film[] }) {
               {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
             </span>
             <Link
-              href="#in-theaters"
+              href="#featured"
               aria-label="Scroll to content"
               className="hidden sm:block"
             >

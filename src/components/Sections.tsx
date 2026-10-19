@@ -9,12 +9,13 @@ import { ArrowUpRight, PlayIcon, TicketIcon } from "./Icons";
 /* ------------------------------- Feature -------------------------------- */
 
 export function Feature({ film }: { film: Film }) {
+  const showing = film.status === "In Cinemas";
   return (
-    <section id="in-theaters" className="scroll-mt-20 py-16 sm:py-24">
+    <section id="featured" className="scroll-mt-20 py-16 sm:py-24">
       <Container>
         <SectionHeading
-          label="Now Showing"
-          title="In Cinemas"
+          label={showing ? "Now Showing" : "From the studio"}
+          title={showing ? "In Cinemas" : film.status}
           href="/films"
         />
 
@@ -41,8 +42,12 @@ export function Feature({ film }: { film: Film }) {
                 />
               </div>
               <div className="absolute bottom-5 left-5 flex items-center gap-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <PlayIcon className="h-3 w-3" />
-                <span className="label">Watch trailer</span>
+                {film.trailer && (
+                  <>
+                    <PlayIcon className="h-3 w-3" />
+                    <span className="label">Watch trailer</span>
+                  </>
+                )}
               </div>
             </Link>
           </div>
@@ -67,8 +72,8 @@ export function Feature({ film }: { film: Film }) {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={`/films/${film.slug}`} size="lg">
-                <TicketIcon className="h-[0.9rem] w-[0.9rem]" />
-                Buy Tickets
+                {showing && <TicketIcon className="h-[0.9rem] w-[0.9rem]" />}
+                {showing ? "Buy Tickets" : "Learn More"}
               </Button>
               <Button href={`/films/${film.slug}`} variant="outline" size="lg">
                 Details
@@ -167,7 +172,7 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
         <SectionHeading label="Notes" title="Studio News" href="/notes" />
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((n) => (
-            <Link key={n.slug} href="/notes" className="group block">
+            <Link key={n.slug} href={`/notes/${n.slug}`} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden bg-smoke">
                 <Media
                   src={n.image}

@@ -4,7 +4,9 @@
 // MEDIA CONVENTION (drop your own pictures & videos in /public/media):
 //   /public/media/films/<slug>/poster.jpg     portrait  2:3   (poster cards)
 //   /public/media/films/<slug>/backdrop.jpg   landscape 16:9  (hero / detail)
-//   /public/media/films/<slug>/preview.mp4     optional looping video
+//   /public/media/films/<slug>/preview.mp4    optional looping video
+//   /public/media/films/<slug>/cast/*.{jpg,mp4}      cast shots & clips
+//   /public/media/films/<slug>/stills/*.jpg          production stills
 //   /public/media/series/<slug>/…              same, for series
 // If a file is missing, the card falls back to a colour + title treatment, and
 // heroes fall back to a blurred-poster layout, so nothing ever looks broken.
@@ -17,6 +19,13 @@ export type FilmStatus =
   | "Streaming"
   | "In Production"
   | "In Development";
+
+/** A single piece of gallery media — a photo, or a looping video tile. */
+export interface MediaEntry {
+  src?: string;
+  video?: string;
+  alt: string;
+}
 
 export interface Film {
   slug: string;
@@ -32,9 +41,19 @@ export interface Film {
   tagline?: string;
   synopsis: string;
   poster: string;
-  backdrop: string;
+  /**
+   * Landscape still for heroes. Leave unset (or remove the file's path here)
+   * and the hero uses the blurred-poster treatment automatically.
+   */
+  backdrop?: string;
   /** optional looping preview video */
   video?: string;
+  /** external trailer URL — the "Watch Trailer" buttons appear when set */
+  trailer?: string;
+  /** cast photos / clips shown on the title's detail page */
+  cast?: MediaEntry[];
+  /** production stills shown on the title's detail page */
+  gallery?: MediaEntry[];
   /** hex colour used for the typographic fallback tile */
   accent: string;
 }
@@ -49,7 +68,12 @@ export interface Series {
   genres: string[];
   synopsis: string;
   poster: string;
-  backdrop: string;
+  backdrop?: string;
+  video?: string;
+  trailer?: string;
+  cast?: MediaEntry[];
+  /** the source novel, when the series is an adaptation */
+  basedOn?: { title: string; author: string; cover: string };
   accent: string;
 }
 
@@ -59,6 +83,8 @@ export interface NewsItem {
   category: string;
   title: string;
   excerpt: string;
+  /** paragraphs shown on the article page */
+  body: string[];
   image?: string;
   accent: string;
 }
@@ -79,8 +105,34 @@ export const films: Film[] = [
     synopsis:
       "A romantic drama about two individuals brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal, emotional discovery, and an unexpected journey toward love. Distributed by Kada Entertainment to more than 50 cinemas.",
     poster: "/media/films/i-love-you-regardless/poster.jpg",
-    backdrop: "/media/films/i-love-you-regardless/backdrop.jpg",
     accent: "#4a2b3a",
+    cast: [
+      { src: "/media/films/i-love-you-regardless/cast/cast-01.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-02.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-03.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-04.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Cast of I Love You Regardless" },
+    ],
+    gallery: [
+      { src: "/media/films/i-love-you-regardless/stills/still-01.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-02.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-03.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-04.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-05.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-06.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-07.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-08.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-09.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-10.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-11.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-12.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-13.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-14.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-15.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-16.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-17.jpg", alt: "Production still from I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/stills/still-18.jpg", alt: "Production still from I Love You Regardless" },
+    ],
   },
   {
     slug: "beguiled",
@@ -92,8 +144,19 @@ export const films: Film[] = [
     synopsis:
       "A new feature from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
     poster: "/media/films/beguiled/poster.jpg",
-    backdrop: "/media/films/beguiled/backdrop.jpg",
     accent: "#241c2e",
+    cast: [
+      { src: "/media/films/beguiled/cast/cast-01.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-02.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-03.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-04.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-05.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-06.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-07.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-08.jpg", alt: "Cast of Beguiled" },
+      { src: "/media/films/beguiled/cast/cast-09.jpg", alt: "Cast of Beguiled" },
+      { video: "/media/films/beguiled/cast/behind-the-scenes.mp4", alt: "Behind the scenes of Beguiled" },
+    ],
   },
   {
     slug: "noise",
@@ -105,7 +168,6 @@ export const films: Film[] = [
     synopsis:
       "A new feature from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
     poster: "/media/films/noise/poster.jpg",
-    backdrop: "/media/films/noise/backdrop.jpg",
     accent: "#2b2b2b",
   },
 ];
@@ -122,14 +184,48 @@ export const series: Series[] = [
     synopsis:
       "An original series from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
     poster: "/media/series/red-crest-high/poster.jpg",
-    backdrop: "/media/series/red-crest-high/backdrop.jpg",
     accent: "#5a1f22",
+    basedOn: {
+      title: "Redcrest High",
+      author: "Tosin Allen",
+      cover: "/media/series/red-crest-high/book/book.jpg",
+    },
+    cast: [
+      { src: "/media/series/red-crest-high/cast/cast-01.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-02.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-03.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-04.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-05.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-06.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-07.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-08.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-09.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-10.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-11.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-12.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-13.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-14.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-15.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-16.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-17.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-18.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-19.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-20.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-21.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-22.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-23.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-24.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-25.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-26.jpg", alt: "Cast of Red Crest High" },
+      { video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4", alt: "Behind the scenes of Red Crest High" },
+    ],
   },
 ];
 
 /* --------------------------- Homepage hero ----------------------------- */
 
-export const heroSlides = [films[0], films[1], films[2]];
+/** First three titles of the slate rotate through the homepage hero. */
+export const heroSlides: Film[] = films.slice(0, 3);
 
 /* --------------------------- Studio profile ---------------------------- */
 
@@ -209,6 +305,11 @@ export const news: NewsItem[] = [
     title: "I Love You Regardless arrives in cinemas",
     excerpt:
       "Our romantic drama opens across more than 50 cinemas, distributed by Kada Entertainment.",
+    body: [
+      "Our romantic drama I Love You Regardless has arrived in cinemas, distributed by Kada Entertainment to more than 50 cinemas.",
+      "The film follows two strangers brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal and emotional discovery — and an unexpected journey toward love.",
+      "For screening times, check your local cinema listings. For broadcast, streaming and international distribution enquiries, get in touch with the studio.",
+    ],
     image: "/media/news/i-love-you-regardless.jpg",
     accent: "#4a2b3a",
   },
@@ -219,6 +320,11 @@ export const news: NewsItem[] = [
     title: "Beguiled, Noise and Red Crest High in development",
     excerpt:
       "Our slate grows with two feature films and our first original series.",
+    body: [
+      "Our slate continues to grow. Beguiled and Noise — two new feature films — are in development, alongside Red Crest High, our first original television series.",
+      "All three titles are being developed by Audrey Allen Pictures, with synopsis, casting and release details to be announced.",
+      "Follow the studio for updates as these productions move forward.",
+    ],
     image: "/media/films/beguiled/poster.jpg",
     accent: "#241c2e",
   },
@@ -229,6 +335,11 @@ export const news: NewsItem[] = [
     title: "Open to international co-productions",
     excerpt:
       "We are building relationships with international distributors, streaming platforms, broadcasters, investors and sponsors.",
+    body: [
+      "We are actively building relationships with international distributors, streaming platforms, broadcasters, investors, corporate sponsors and tourism organizations.",
+      "Our aim is simple: to bring stories that celebrate African culture to audiences across Africa and around the world — through co-productions, licensing and long-term partnerships.",
+      "If you're a distributor, platform, sponsor or financier interested in working with us, we'd like to hear from you.",
+    ],
     image: "/media/series/red-crest-high/poster.jpg",
     accent: "#3a5a4a",
   },
@@ -240,6 +351,14 @@ export function getFilm(slug: string): Film | undefined {
   return films.find((f) => f.slug === slug);
 }
 
+export function getSeries(slug: string): Series | undefined {
+  return series.find((s) => s.slug === slug);
+}
+
+export function getNews(slug: string): NewsItem | undefined {
+  return news.find((n) => n.slug === slug);
+}
+
 export function relatedFilms(slug: string, count = 4): Film[] {
   return films.filter((f) => f.slug !== slug).slice(0, count);
 }
@@ -248,11 +367,3 @@ export function relatedFilms(slug: string, count = 4): Film[] {
 export function genreLabel(item: { genres: string[] }): string {
   return item.genres.length ? item.genres.join(" / ") : "To be announced";
 }
-
-export const statusOrder: FilmStatus[] = [
-  "In Cinemas",
-  "Coming Soon",
-  "Streaming",
-  "In Production",
-  "In Development",
-];

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Shop" };
 
 export default function ShopPage() {
   return (
-    <main className="pt-16">
+    <div className="pt-16">
       <Container className="max-w-3xl py-20 sm:py-32">
         <p className="label text-ash">Shop</p>
         <h1 className="mt-5 font-sans text-[2.4rem] font-medium leading-[1] tracking-[-0.03em] sm:text-[3.5rem]">
@@ -25,6 +25,6 @@ export default function ShopPage() {
           </Button>
         </div>
       </Container>
-    </main>
+    </div>
   );
 }

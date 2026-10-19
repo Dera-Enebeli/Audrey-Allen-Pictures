@@ -6,6 +6,8 @@
 // the hero falls back to a clean brand-colour panel that still looks deliberate.
 // ---------------------------------------------------------------------------
 
+import { site } from "./site";
+
 export interface FocusArea {
   letter: string;
   title: string;
@@ -117,9 +119,9 @@ export const foundation = {
     { src: "/media/foundation/gallery-28.jpg", alt: "Audrey Allen Foundation orphanage visit" },
   ],
 
-  /** Placeholder contact — replace with the foundation's real address. */
+  /** TODO: replace with the foundation's own address when it has one. */
   contact: {
-    email: "hello@example.com",
+    email: site.contact.email,
     ctaLabel: "Partner with the foundation",
   },
 } as const;

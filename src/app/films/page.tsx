@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Film" };
 
 export default function FilmsPage() {
   return (
-    <main className="pt-16">
+    <div className="pt-16">
       <Container className="pb-10 pt-16 sm:pt-24">
         <p className="label text-ash">Film</p>
         <h1 className="mt-5 font-sans text-[2.75rem] font-medium leading-[0.95] tracking-[-0.035em] sm:text-[4rem]">
@@ -20,6 +20,6 @@ export default function FilmsPage() {
         </p>
       </Container>
       <CatalogueGrid items={films} hrefBase="/films" kind="film" />
-    </main>
+    </div>
   );
 }

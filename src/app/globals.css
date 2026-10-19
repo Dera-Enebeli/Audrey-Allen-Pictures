@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
-   A24-inspired design tokens
-   Sans + Mono are self-hostable: drop font files in /public/fonts and
-   they are picked up automatically (see layout.tsx comments).
+   A24-inspired design tokens.
+   The current stack (Switzer + Chivo Mono) is loaded from Fontshare in
+   layout.tsx. To self-host instead: drop .woff2 files in /public/fonts,
+   add @font-face rules above, and name the families in --font-sans /
+   --font-mono below.
  * ------------------------------------------------------------------ */
 @theme {
   --font-sans: "A24 Sans", "PP Neue Montreal", "Switzer", "Helvetica Neue",
@@ -87,17 +89,15 @@
   }
 }
 
-/* Edge fades for horizontal rails */
-@utility rail-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 2.5rem,
-    #000 calc(100% - 2.5rem),
-    transparent 100%
-  );
-}
-
-@utility hairline {
-  border-color: var(--color-line);
+/* Honour the OS "reduce motion" setting: stop the marquee, bounce and
+   entrance animations, and collapse transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

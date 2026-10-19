@@ -11,7 +11,9 @@ import {
 import { Newsletter } from "@/components/Newsletter";
 import { Membership } from "@/components/Membership";
 import { Container, SectionHeading } from "@/components/ui";
+import { Media } from "@/components/Media";
 import { films, heroSlides, news, series } from "@/lib/content";
+import { site } from "@/lib/site";
 
 export default function HomePage() {
   const feature = films.find((f) => f.status === "In Cinemas") ?? films[0];
@@ -33,6 +35,27 @@ export default function HomePage() {
           "Thriller",
         ]}
       />
+
+      {/* brand logo video in the middle of the landing page */}
+      <section id="brand-logo" className="py-12 sm:py-20 bg-gradient-to-b from-ink via-ink/10 to-ink/5">
+        <Container className="max-w-3xl mx-auto">
+          <div className="relative mb-8 h-[300px] w-full overflow-hidden rounded-xl">
+            <Media
+              video="/media/brand/LOGO.mp4"
+              alt="Audrey Allen Pictures Brand Logo"
+              accent="#4a2b3a"
+              title={site.brand.shortName}
+              label="Brand"
+              priority
+            />
+          </div>
+          <h2 className="label text-ash">Audrey Allen Pictures</h2>
+          <p className="mt-4 text-[0.95rem] text-ink/70 leading-relaxed">
+            Celebrating over a decade of bringing African stories to the world through
+            innovative filmmaking and entertainment.
+          </p>
+        </Container>
+      </section>
 
       <Feature film={feature} />
 

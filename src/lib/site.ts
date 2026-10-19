@@ -4,6 +4,12 @@
 // ---------------------------------------------------------------------------
 
 export const site = {
+  /**
+   * Production origin — used for canonical URLs, Open Graph, robots & sitemap.
+   * TODO: confirm this matches the final production domain.
+   */
+  url: "https://audrey-allen-pictures.vercel.app",
+
   brand: {
     /** Full legal / wordmark name */
     name: "Audrey Allen Pictures",
@@ -18,6 +24,11 @@ export const site = {
     title: "Audrey Allen Pictures — International Film, Television & Entertainment",
     description:
       "Audrey Allen Pictures is an independent film and television production company developing, producing and promoting exceptional entertainment that celebrates African culture and connects audiences across Africa and the world.",
+  },
+
+  /** Public contact address. TODO: replace with the real studio inbox. */
+  contact: {
+    email: "hello@example.com",
   },
 
   /** Header + mobile menu links */
@@ -35,17 +46,10 @@ export const site = {
     { label: "Contact", href: "/about#contact" },
   ],
 
-  cta: {
-    label: "Get in touch",
-    href: "/about#contact",
-  },
-
   newsletter: {
     heading: "Subscribe for more from the studio.",
     blurb:
       "New releases, festival news and dispatches from set. No noise — just the films.",
-    consent:
-      "By providing my email, I agree to receive Audrey Allen Pictures promotional materials and have read and agree to the Terms of Use and Privacy Policy.",
   },
 
   membership: {
@@ -95,6 +99,7 @@ export const site = {
       },
     ],
 
+    /** TODO: point each link at the studio's real profiles. */
     social: [
       { label: "Instagram", href: "https://instagram.com" },
       { label: "X", href: "https://x.com" },
@@ -107,5 +112,3 @@ export const site = {
       "Audrey Allen Pictures — International Film, Television and Entertainment Production Company.",
   },
 } as const;
-
-export type Site = typeof site;

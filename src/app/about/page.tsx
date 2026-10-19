@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Studio" };
 
 export default function AboutPage() {
   return (
-    <main className="pt-16">
+    <div className="pt-16">
       {/* masthead */}
       <section className="border-b border-line">
         <Container className="py-16 sm:py-24">
@@ -23,34 +23,38 @@ export default function AboutPage() {
           <p className="mt-4 label text-ash">
             International Film, Television &amp; Entertainment Production Company
           </p>
-          <Media
-            src={studio.image}
-            alt="Audrey Allen Pictures"
-            accent={studio.accent}
-            title="Audrey Allen Pictures"
-            label="Company Profile"
-          />
+          <div className="relative mt-12 aspect-[16/7] w-full overflow-hidden bg-smoke">
+            <Media
+              src={studio.image}
+              alt="Audrey Allen Pictures"
+              accent={studio.accent}
+              title="Audrey Allen Pictures"
+              label="Company Profile"
+            />
+          </div>
         </Container>
       </section>
       {/* brand video intro */}
       <section id="brand-intro" className="py-12 sm:py-20 border-t border-line bg-smoke">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <Media
-              src="/media/brand/LOGO.mp4"
-              alt="Audrey Allen Pictures Brand Intro"
-              accent={studio.accent}
-              className="relative h-[300px] w-full object-cover rounded-xl mb-8"
-            />
+            <div className="relative mx-auto mb-8 h-[300px] w-full overflow-hidden rounded-xl">
+              <Media
+                video="/media/brand/LOGO.mp4"
+                alt="Audrey Allen Pictures Brand Intro"
+                accent={studio.accent}
+                title={site.brand.shortName}
+                label="Brand"
+              />
+            </div>
             <h2 className="label text-ash">Audrey Allen Pictures</h2>
-            <p className="mt-4 text-[1.1rem] text-[0.95rem] text-ink/70 leading-relaxed">
+            <p className="mt-4 text-[0.95rem] text-ink/70 leading-relaxed">
               Celebrating over a decade of bringing African stories to the world through
               innovative filmmaking and entertainment.
             </p>
           </div>
         </Container>
       </section>
-      {/* about */}
       {/* about */}
       <section id="about" className="scroll-mt-20 py-16 sm:py-24">
         <Container>
@@ -62,8 +66,8 @@ export default function AboutPage() {
               <p className="font-sans text-[1.4rem] font-medium leading-[1.3] tracking-[-0.02em] sm:text-[1.75rem]">
                 {studio.intro}
               </p>
-              {studio.about.map((para) => (
-                <p key={para.slice(0, 24)} className="max-w-3xl leading-relaxed text-ink/75">
+              {studio.about.map((para, i) => (
+                <p key={i} className="max-w-3xl leading-relaxed text-ink/75">
                   {para}
                 </p>
               ))}
@@ -159,12 +163,12 @@ export default function AboutPage() {
                 heritage, locations and experiences on screen — get in touch.
               </p>
               <Button
-                href="mailto:hello@example.com"
+                href={`mailto:${site.contact.email}`}
                 size="lg"
                 className="mt-8"
                 icon
               >
-                hello@example.com
+                {site.contact.email}
               </Button>
             </div>
             <div className="lg:col-span-6">
@@ -189,6 +193,6 @@ export default function AboutPage() {
       </section>
 
       <Membership />
-    </main>
+    </div>
   );
 }

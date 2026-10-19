@@ -12,15 +12,6 @@ const base = {
   "aria-hidden": true,
 };
 
-export function SearchIcon(p: IconProps) {
-  return (
-    <svg {...base} {...p}>
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.2-3.2" />
-    </svg>
-  );
-}
-
 export function UserIcon(p: IconProps) {
   return (
     <svg {...base} {...p}>

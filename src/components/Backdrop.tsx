@@ -57,14 +57,16 @@ export function Backdrop({
   }
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
+    // The caller's className (e.g. a hero's `scale-105`) belongs on the wrapper —
+    // merging it into the blurred fill would fight the fill's own `scale-125`.
+    <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
       {/* blurred poster fill */}
       <Media
         src={poster}
         alt=""
         accent={accent}
         priority={priority}
-        className={`scale-125 ${className}`}
+        className="scale-125"
         imgClassName="blur-3xl"
       />
       <div className="absolute inset-0 bg-black/45" />

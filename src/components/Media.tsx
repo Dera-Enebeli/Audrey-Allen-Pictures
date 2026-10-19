@@ -88,7 +88,6 @@ export function Media({
     <div
       className={`relative flex h-full w-full flex-col justify-between overflow-hidden p-4 ${className}`}
       style={{ backgroundColor: accent }}
-      aria-hidden={false}
     >
       <span className="label text-[0.6rem] text-white/70">{label}</span>
       <span className="font-sans text-[1.6rem] font-medium leading-[0.95] tracking-[-0.03em] text-white/95">

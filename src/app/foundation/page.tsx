@@ -164,7 +164,7 @@ export default function FoundationPage() {
                 Whether you are a studio, broadcaster, brand, philanthropist or
                 an individual who cares about children, there is a place for you
                 in this work. Partner with us on productions, screenings,
-                campaigns and programmes that change children's lives.
+                campaigns and programmes that change children&apos;s lives.
               </p>
               <Button
                 href={`mailto:${foundation.contact.email}`}

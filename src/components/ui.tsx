@@ -97,10 +97,10 @@ export function SectionHeading({
 }) {
   const dim = tone === "paper" ? "text-white/60" : "text-ash";
   const strong = tone === "paper" ? "text-white" : "text-ink";
-  const rule = tone === "paper" ? "bg-white/20" : "bg-line";
+  const rule = tone === "paper" ? "border-white/20" : "border-line";
   return (
-    <div className={`flex items-end justify-between gap-6 border-t pt-5 ${className}`}
-      style={{ borderColor: tone === "paper" ? "rgba(255,255,255,.2)" : undefined }}
+    <div
+      className={`flex items-end justify-between gap-6 border-t pt-5 ${rule} ${className}`}
     >
       <div>
         {label && <p className={`label mb-3 ${dim}`}>{label}</p>}

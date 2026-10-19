@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Terms of Use" };
 
 export default function TermsPage() {
   return (
-    <main className="pt-16">
+    <div className="pt-16">
       <Container className="max-w-3xl py-16 sm:py-24">
         <p className="label text-ash">Legal</p>
         <h1 className="mt-5 font-sans text-[2.4rem] font-medium leading-[1] tracking-[-0.03em] sm:text-[3rem]">
@@ -29,6 +29,6 @@ export default function TermsPage() {
           </p>
         </div>
       </Container>
-    </main>
+    </div>
   );
 }
