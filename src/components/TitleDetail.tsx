@@ -29,6 +29,7 @@ export function TitleDetail({
   const trailer = "trailer" in item ? item.trailer : undefined;
   const cast = "cast" in item ? item.cast : undefined;
   const videos = "videos" in item ? item.videos : undefined;
+  const bts = film?.bts;
   const gallery = film?.gallery;
 
   return (
@@ -106,6 +107,38 @@ export function TitleDetail({
           </div>
         </Container>
       </section>
+
+      {/* behind the scenes — featured clip, given its own billing */}
+      {bts && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label={bts.kind} title="Behind the Scenes" />
+            <div className="mt-9 grid gap-10 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-8">
+                <div className="relative aspect-video w-full overflow-hidden bg-black">
+                  <Media
+                    video={bts.video}
+                    alt={`Behind the scenes of ${item.title}`}
+                    accent={item.accent}
+                    title={item.title}
+                    label={bts.kind}
+                    priority
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col justify-end lg:col-span-4">
+                <p className="label">{bts.kind}</p>
+                <h3 className="mt-4 font-sans text-[1.6rem] font-medium leading-[1.05] tracking-[-0.025em] sm:text-[2rem]">
+                  {bts.title}
+                </h3>
+                {bts.caption && (
+                  <p className="mt-4 leading-relaxed text-ink/75">{bts.caption}</p>
+                )}
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* based on the book */}
       {series?.basedOn && (

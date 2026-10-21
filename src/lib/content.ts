@@ -67,6 +67,8 @@ export interface Film {
   cast?: MediaEntry[];
   /** production stills shown on the title's detail page */
   gallery?: MediaEntry[];
+  /** featured behind-the-scenes clip — gets its own section on the page */
+  bts?: { video: string; title: string; kind: string; caption?: string };
   /** hex colour used for the typographic fallback tile */
   accent: string;
 }
@@ -150,6 +152,9 @@ export const films: Film[] = [
       { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Cast of I Love You Regardless" },
     ],
     gallery: [
+      { video: "/media/films/i-love-you-regardless/videos/clip-01.mp4", alt: "I Love You Regardless — clip 1", kind: "Clip" },
+      { video: "/media/films/i-love-you-regardless/videos/clip-02.mp4", alt: "I Love You Regardless — clip 2", kind: "Clip" },
+      { video: "/media/films/i-love-you-regardless/videos/clip-03.mp4", alt: "I Love You Regardless — clip 3", kind: "Clip" },
       { src: "/media/films/i-love-you-regardless/stills/still-01.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-02.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-03.jpg", alt: "Production still from I Love You Regardless" },
@@ -168,9 +173,6 @@ export const films: Film[] = [
       { src: "/media/films/i-love-you-regardless/stills/still-16.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-17.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-18.jpg", alt: "Production still from I Love You Regardless" },
-      { video: "/media/films/i-love-you-regardless/videos/clip-01.mp4", alt: "I Love You Regardless — clip 1", kind: "Clip" },
-      { video: "/media/films/i-love-you-regardless/videos/clip-02.mp4", alt: "I Love You Regardless — clip 2", kind: "Clip" },
-      { video: "/media/films/i-love-you-regardless/videos/clip-03.mp4", alt: "I Love You Regardless — clip 3", kind: "Clip" },
     ],
   },
   {
@@ -193,8 +195,14 @@ export const films: Film[] = [
       { src: "/media/films/beguiled/cast/cast-06.jpg", alt: "Cast of Beguiled" },
       { src: "/media/films/beguiled/cast/cast-07.jpg", alt: "Cast of Beguiled" },
       { src: "/media/films/beguiled/cast/cast-08.jpg", alt: "Cast of Beguiled" },
-      { video: "/media/films/beguiled/cast/behind-the-scenes.mp4", alt: "Behind the scenes of Beguiled" },
     ],
+    bts: {
+      video: "/media/films/beguiled/cast/behind-the-scenes.mp4",
+      title: "Beguiled",
+      kind: "Behind the scenes",
+      caption:
+        "A first look from the set of Beguiled — the cast and crew at work on Audrey Allen Pictures' upcoming feature.",
+    },
   },
   {
     slug: "noise",
