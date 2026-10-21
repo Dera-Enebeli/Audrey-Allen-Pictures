@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
-   A24 design system.
+   Black + antique gold.
    Type: PP Neue Montreal + PP Neue Montreal Mono (variable), self-hosted
-   from /public/fonts — the exact pair a24films.com ships. Pangram Pangram
-   typefaces are commercially licensed: confirm your licence covers
-   production use, or swap the src URLs for your own files.
-   Palette: A24's warm-neutral scale, dark-first (#0e0e0d canvas).
+   from /public/fonts. Pangram Pangram typefaces are commercially licensed:
+   confirm your licence covers production use, or swap the src URLs for
+   your own files.
+   Palette: near-black canvas, warm off-white text, antique gold reserved
+   for hairlines, eyebrows, hover states and focus — never large fills.
  * ------------------------------------------------------------------ */
 
 @font-face {
@@ -31,12 +32,13 @@
   --font-mono: "PP Neue Montreal Mono", ui-monospace, "SFMono-Regular", Menlo,
     monospace;
 
-  /* warm-neutral-50 / -1000 / -975 / -650 + border-default @18% */
-  --color-ink: #f2f0ed;
-  --color-paper: #0e0e0d;
-  --color-smoke: #141313;
-  --color-ash: #9c9791;
-  --color-line: rgba(242, 240, 237, 0.18);
+  /* near-black canvas / raised surface / off-white text / muted + gold accent */
+  --color-ink: #f4f1ea;
+  --color-paper: #0a0a0a;
+  --color-smoke: #111010;
+  --color-ash: #8f8a80;
+  --color-line: rgba(201, 162, 39, 0.22);
+  --color-gold: #c9a227;
 
   --animate-marquee: marquee 34s linear infinite;
   --animate-fade-up: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -76,7 +78,7 @@
   }
 
   ::selection {
-    background: var(--color-ink);
+    background: var(--color-gold);
     color: var(--color-paper);
   }
 
@@ -86,19 +88,22 @@
   }
 
   :focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
   }
 }
 
-/* Uppercase mono eyebrow — A24's chrome label (10px, tight tracking) */
+/* Uppercase mono eyebrow — the gold chrome label.
+   Note: this sets colour, so any text-* utility must come after it in the
+   class list to override (Tailwind emits utilities after @utility). */
 @utility label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1;
+  color: var(--color-gold);
 }
 
 @utility no-scrollbar {

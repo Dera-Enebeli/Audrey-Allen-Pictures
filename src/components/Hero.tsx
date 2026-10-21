@@ -50,7 +50,7 @@ export function Hero({ slides }: { slides: Film[] }) {
             )}
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href={`/films/${slide.slug}`} variant="light" size="lg">
-                {slide.status === "In Cinemas" ? "Get Tickets" : "Learn More"}
+                View details
               </Button>
               {slide.trailer && (
                 <Button

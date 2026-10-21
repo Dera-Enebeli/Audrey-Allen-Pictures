@@ -3,12 +3,10 @@ import { site } from "@/lib/site";
 import { Container } from "./ui";
 import { Logo } from "./Logo";
 import { Newsletter } from "./Newsletter";
-import { Membership } from "./Membership";
 
 /**
- * Footer follows a24films.com's order: link sets (big sans links, hairline
- * column rule), then the subscribe block, then the membership upsell under a
- * full-strength rule, then the mono copyright bar with legal links.
+ * Footer: brand block + link sets (big sans links, hairline column rule),
+ * then the subscribe block, then the mono copyright bar with legal links.
  */
 export function SiteFooter() {
   return (
@@ -63,7 +61,6 @@ export function SiteFooter() {
       </Container>
 
       <Newsletter />
-      <Membership />
 
       <Container>
         <div className="border-t border-ink py-8">

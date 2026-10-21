@@ -9,7 +9,6 @@ const staticPages = [
   "/foundation",
   "/about",
   "/notes",
-  "/shop",
   "/terms",
   "/privacy",
 ];

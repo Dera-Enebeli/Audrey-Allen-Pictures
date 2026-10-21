@@ -52,14 +52,6 @@ export const site = {
       "New releases, festival news and dispatches from set. No noise — just the films.",
   },
 
-  membership: {
-    kicker: "The Audrey Allen Club",
-    heading: "Your ticket to everything we make.",
-    blurb:
-      "Members get early access to screenings, monthly credits, shop discounts, exclusive cuts and more.",
-    ctaLabel: "Become a member",
-  },
-
   footer: {
     columns: [
       {

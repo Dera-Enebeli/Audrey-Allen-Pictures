@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { Logo } from "./Logo";
-import { BagIcon, CloseIcon, MenuIcon, UserIcon } from "./Icons";
+import { CloseIcon, MenuIcon } from "./Icons";
 
 /** Pages whose hero sits on a dark image — the header starts light there. */
 function isOverlayRoute(pathname: string) {
@@ -108,20 +108,6 @@ export function SiteHeader() {
               className="flex items-center gap-4"
               style={{ color: tone === "paper" ? "#fff" : "var(--color-ink)" }}
             >
-              <Link
-                href="/#membership"
-                aria-label="The Club"
-                className="hidden transition-opacity hover:opacity-55 sm:block"
-              >
-                <UserIcon className="h-[1.15rem] w-[1.15rem]" />
-              </Link>
-              <Link
-                href="/shop"
-                aria-label="Shop"
-                className="hidden transition-opacity hover:opacity-55 sm:block"
-              >
-                <BagIcon className="h-[1.15rem] w-[1.15rem]" />
-              </Link>
               <button
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}

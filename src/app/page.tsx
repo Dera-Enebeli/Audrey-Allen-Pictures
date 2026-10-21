@@ -1,11 +1,8 @@
 import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
 import { Rail } from "@/components/Rail";
 import { PosterCard } from "@/components/cards";
 import {
-  ActivitiesSection,
   Feature,
-  MissionTeaser,
   NewsSection,
   UpcomingSection,
 } from "@/components/Sections";
@@ -22,46 +19,27 @@ export default function HomePage() {
     <>
       <Hero slides={heroSlides} />
 
-      <Marquee
-        items={[
-          "Original Features",
-          "Television Series",
-          "International Co-Productions",
-          "African Stories",
-          "Drama",
-          "Romance",
-          "Comedy",
-          "Horror",
-          "Thriller",
-        ]}
-      />
-
-      {/* brand logo video in the middle of the landing page */}
-      <section id="brand-logo" className="border-t border-line py-12 sm:py-20">
+      {/* brand logo video — the studio's mark, shown once */}
+      <section id="brand-logo" className="border-t border-line py-16 sm:py-24">
         <Container className="max-w-3xl mx-auto">
           {/* LOGO.mp4 is portrait 3:4 — frame it at its native ratio so
               the whole animation stays visible */}
-          <div className="relative mx-auto mb-8 aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
             <Media
               video="/media/brand/LOGO.mp4"
               alt="Audrey Allen Pictures Brand Logo"
               accent="#4a2b3a"
-              title={site.brand.shortName}
-              label="Brand"
+              title={site.brand.name}
+              label="The studio"
               priority
             />
           </div>
-          <h2 className="label text-ash">Audrey Allen Pictures</h2>
-          <p className="mt-4 text-[0.95rem] text-ink/70 leading-relaxed">
-            Celebrating over a decade of bringing African stories to the world through
-            innovative filmmaking and entertainment.
-          </p>
         </Container>
       </section>
 
       <Feature film={feature} />
 
-      {/* Our Productions */}
+      {/* Films */}
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
           <SectionHeading label="The Slate" title="Films" href="/films" />
@@ -80,8 +58,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      <ActivitiesSection />
 
       {/* Series */}
       <section className="border-t border-line py-16 sm:py-24">
@@ -103,10 +79,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Upcoming projects — placeholders pending real titles */}
       <UpcomingSection items={upcomingProjects} />
 
-      <MissionTeaser />
       <NewsSection items={news} />
     </>
   );

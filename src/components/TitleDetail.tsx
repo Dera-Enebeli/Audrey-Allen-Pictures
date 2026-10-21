@@ -6,7 +6,7 @@ import { Media } from "./Media";
 import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
-import { PlayIcon, TicketIcon } from "./Icons";
+import { PlayIcon } from "./Icons";
 
 type Title = Film | Series;
 
@@ -59,22 +59,14 @@ export function TitleDetail({
               </p>
             )}
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Button href="#where" variant="light" size="lg">
-                {item.status === "In Cinemas" ? (
-                  <TicketIcon className="h-[0.9rem] w-[0.9rem]" />
-                ) : null}
-                {item.status === "In Cinemas" ? "Buy Tickets" : "Get Updates"}
-              </Button>
-              {trailer && (
-                <Button
-                  href={trailer}
-                  external
-                  variant="outline"
-                  size="lg"
-                  className="border-white/40 text-white hover:border-white"
-                >
+              {trailer ? (
+                <Button href={trailer} external variant="light" size="lg">
                   <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
                   Watch Trailer
+                </Button>
+              ) : (
+                <Button href="/#newsletter" variant="light" size="lg">
+                  Get Updates
                 </Button>
               )}
             </div>
@@ -93,7 +85,7 @@ export function TitleDetail({
               </p>
             </div>
 
-            <div className="lg:col-span-5" id="where">
+            <div className="lg:col-span-5">
               <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-7">
                 <Meta label="Genre" value={genreLabel(item)} />
                 <Meta label="Year" value={String(item.year)} />
@@ -108,23 +100,6 @@ export function TitleDetail({
                 )}
                 <Meta label="Status" value={item.status} />
               </dl>
-
-              <div className="mt-9 border-t border-line pt-7">
-                <h3 className="label text-ash">Where to watch</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">
-                  {item.status === "In Cinemas"
-                    ? "Available in cinemas and on select streaming platforms. Check your local listings for showtimes."
-                    : "Release details are still being finalised. Subscribe to the newsletter or get in touch to hear when this title lands."}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Button href="/about#contact" size="md">
-                    Find a screening
-                  </Button>
-                  <Button href="/about#contact" variant="outline" size="md">
-                    Partner with us
-                  </Button>
-                </div>
-              </div>
             </div>
           </div>
         </Container>
@@ -160,10 +135,10 @@ export function TitleDetail({
                   characters and conflicts to the screen for the first time.
                 </p>
                 {series.basedOn.synopsis && (
-                  <details className="mt-8 group">
-                    <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none group-hover:text-ash transition-colors">
+                  <details className="mt-8">
+                    <summary className="flex items-center gap-2 label cursor-pointer select-none transition-colors hover:opacity-70 list-none">
                       <span>About the novel</span>
-                      <span className="ml-auto transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+                      <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                     </summary>
                     <div className="mt-6 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
                       {series.basedOn.synopsis.split('\n\n').map((para, i) => (

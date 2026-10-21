@@ -1,21 +1,20 @@
 import Link from "next/link";
 import type { Film, NewsItem, UpcomingProject } from "@/lib/content";
-import { activities, genreLabel, studio } from "@/lib/content";
+import { genreLabel } from "@/lib/content";
 import { Media } from "./Media";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading } from "./ui";
-import { ArrowUpRight, PlayIcon, TicketIcon } from "./Icons";
+import { ArrowUpRight, PlayIcon } from "./Icons";
 
 /* ------------------------------- Feature -------------------------------- */
 
 export function Feature({ film }: { film: Film }) {
-  const showing = film.status === "In Cinemas";
   return (
-    <section id="featured" className="scroll-mt-20 py-16 sm:py-24">
+    <section id="featured" className="scroll-mt-20 border-t border-line py-16 sm:py-24">
       <Container>
         <SectionHeading
-          label={showing ? "Now Showing" : "From the studio"}
-          title={showing ? "In Cinemas" : film.status}
+          label="Featured"
+          title="From the studio"
           href="/films"
         />
 
@@ -65,11 +64,11 @@ export function Feature({ film }: { film: Film }) {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={`/films/${film.slug}`} size="lg">
-                {showing && <TicketIcon className="h-[0.9rem] w-[0.9rem]" />}
-                {showing ? "Buy Tickets" : "Learn More"}
+                View details
               </Button>
               {film.trailer && (
                 <Button href={film.trailer} external variant="outline" size="lg">
+                  <PlayIcon className="h-[0.7rem] w-[0.7rem]" />
                   Watch Trailer
                 </Button>
               )}
@@ -87,74 +86,6 @@ function Meta({ label, value }: { label: string; value: string }) {
       <dt className="label text-ash">{label}</dt>
       <dd className="mt-1.5 text-[0.95rem] leading-snug">{value}</dd>
     </div>
-  );
-}
-
-/* ------------------------------ Activities ------------------------------ */
-
-export function ActivitiesSection() {
-  return (
-    <section id="activities" className="scroll-mt-20 border-t border-line py-16 sm:py-24">
-      <Container>
-        <SectionHeading label="What We Do" title="Core Activities" />
-        <div className="mt-10 grid gap-x-16 md:grid-cols-2">
-          {activities.map((a, i) => (
-            <div key={a.title} className="flex gap-6 border-t border-line py-7">
-              <span className="label pt-1.5 text-ash tabular-nums">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="font-sans text-[1.2rem] font-medium tracking-[-0.01em]">
-                  {a.title}
-                </h3>
-                <p className="mt-2 max-w-md leading-relaxed text-ink/70">
-                  {a.body}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/* -------------------------------- Studio -------------------------------- */
-
-export function MissionTeaser() {
-  return (
-    <section className="border-t border-line bg-smoke py-16 sm:py-24">
-      <Container>
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="label text-ash">Our Studio</p>
-            <p className="mt-5 font-sans text-[1.35rem] font-medium leading-[1.15] tracking-[-0.02em]">
-              {studio.genres.join(" · ")}
-            </p>
-          </div>
-          <div className="lg:col-span-8">
-            <p className="font-sans text-[1.5rem] font-medium leading-[1.28] tracking-[-0.02em] sm:text-[1.9rem]">
-              {studio.intro}
-            </p>
-
-            <div className="mt-12 grid gap-10 border-t border-line pt-10 sm:grid-cols-2">
-              <div>
-                <h3 className="label text-ash">Our Mission</h3>
-                <p className="mt-3 leading-relaxed text-ink/75">{studio.mission}</p>
-              </div>
-              <div>
-                <h3 className="label text-ash">Our Vision</h3>
-                <p className="mt-3 leading-relaxed text-ink/75">{studio.vision}</p>
-              </div>
-            </div>
-
-            <Button href="/about" variant="outline" size="lg" className="mt-10" icon>
-              More about the studio
-            </Button>
-          </div>
-        </div>
-      </Container>
-    </section>
   );
 }
 
