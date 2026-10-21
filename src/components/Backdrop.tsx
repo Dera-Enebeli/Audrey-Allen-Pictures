@@ -23,6 +23,12 @@ export function Backdrop({
   className = "",
   imgClassName = "",
   posterWidth = "w-[62%] max-w-[440px]",
+  /**
+   * `card` — the default: a small fixed-ratio poster card centred in the frame.
+   * `fill` — the poster is as large as the frame's height allows and shows in
+   *   full (no crop), with the blurred fill either side. Used on series pages.
+   */
+  posterFit = "card",
 }: {
   poster?: string;
   backdrop?: string;
@@ -35,6 +41,7 @@ export function Backdrop({
   className?: string;
   imgClassName?: string;
   posterWidth?: string;
+  posterFit?: "card" | "fill";
 }) {
   const [backdropFailed, setBackdropFailed] = useState(!backdrop);
 
@@ -72,20 +79,40 @@ export function Backdrop({
       <div className="absolute inset-0 bg-black/45" />
 
       {/* centred poster */}
-      <div className="absolute inset-0 flex items-center justify-center p-6">
-        <div
-          className={`relative aspect-[2/3] ${posterWidth} overflow-hidden shadow-2xl`}
-        >
-          <Media
+      {posterFit === "fill" ? (
+        // Series treatment: the whole poster, as tall as the frame allows,
+        // with the blurred fill either side. Nothing is cropped.
+        //
+        // The image keeps its own ratio and is bounded by BOTH the frame's
+        // height and width (`max-h-full max-w-full`), so a tall portrait fills
+        // the height on desktop and scales down cleanly on a narrow phone
+        // without letterboxing inside an oversized element.
+        <div className="absolute inset-0 flex items-center justify-center px-6 py-10 sm:py-14">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={poster}
             alt={title ?? ""}
-            accent={accent}
-            title={title}
-            label={label}
-            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            className="h-auto w-auto max-h-full max-w-full object-contain shadow-2xl"
           />
         </div>
-      </div>
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div
+            className={`relative aspect-[2/3] ${posterWidth} overflow-hidden shadow-2xl`}
+          >
+            <Media
+              src={poster}
+              alt={title ?? ""}
+              accent={accent}
+              title={title}
+              label={label}
+              priority={priority}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

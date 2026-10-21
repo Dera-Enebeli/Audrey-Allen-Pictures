@@ -47,6 +47,7 @@ export function TitleDetail({
           accent={item.accent}
           label={item.status}
           priority
+          posterFit={series ? "fill" : "card"}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/30" />
         <Container className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
