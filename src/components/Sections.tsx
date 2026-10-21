@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { Film, NewsItem, UpcomingProject } from "@/lib/content";
 import { genreLabel } from "@/lib/content";
-import { Media } from "./Media";
 import { Backdrop } from "./Backdrop";
+import { FramedMedia } from "./FramedMedia";
 import { Button, Container, SectionHeading } from "./ui";
 import { ArrowUpRight, PlayIcon } from "./Icons";
 
@@ -100,13 +100,13 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
           {items.map((n) => (
             <Link key={n.slug} href={`/notes/${n.slug}`} className="group block">
               <div className="relative aspect-[4/3] overflow-hidden bg-smoke">
-                <Media
+                <FramedMedia
                   src={n.image}
                   alt={n.title}
                   accent={n.accent}
                   title={n.title}
                   label={n.category}
-                  imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+                  innerClassName="transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
               <div className="mt-4 flex items-center gap-3">
@@ -148,13 +148,13 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
           {items.map((p) => (
             <div key={p.slug} className="group">
               <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
-                <Media
+                <FramedMedia
                   src={p.image}
                   alt={`Photograph from ${p.title}`}
                   accent={p.accent}
                   title={p.title}
                   label="Upcoming"
-                  imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+                  innerClassName="transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
               <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">

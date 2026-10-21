@@ -5,6 +5,7 @@ import { Rail } from "./Rail";
 import { Media } from "./Media";
 import { VideoTile } from "./VideoTile";
 import { ClipPlayer } from "./ClipPlayer";
+import { FramedMedia } from "./FramedMedia";
 import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
@@ -299,18 +300,31 @@ function MediaRail({
       {entries.map((entry, i) => (
         <div
           key={entry.src ?? entry.video ?? i}
-          className={`w-[220px] shrink-0 snap-start sm:w-[260px] ${railCell}`}
+          className={`group w-[220px] shrink-0 snap-start sm:w-[260px] ${railCell}`}
         >
           <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
-            <Media
-              src={entry.src}
-              video={entry.video}
-              alt={entry.alt}
-              accent={accent}
-              title={fallbackTitle}
-              label={entry.kind ?? (entry.video ? "Watch" : "Cast")}
-              imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
-            />
+            {entry.video ? (
+              // Video entries keep the cover fill — a blurred fill of a moving
+              // frame behind a contained one would double the decode cost.
+              <Media
+                src={entry.src}
+                video={entry.video}
+                alt={entry.alt}
+                accent={accent}
+                title={fallbackTitle}
+                label={entry.kind ?? "Watch"}
+                imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
+              />
+            ) : (
+              <FramedMedia
+                src={entry.src}
+                alt={entry.alt}
+                accent={accent}
+                title={fallbackTitle}
+                label={entry.kind ?? "Cast"}
+                innerClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+              />
+            )}
           </div>
         </div>
       ))}

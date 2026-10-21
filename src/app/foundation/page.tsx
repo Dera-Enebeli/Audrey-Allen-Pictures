@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Media } from "@/components/Media";
+import { FramedMedia } from "@/components/FramedMedia";
 import { Button, Container, SectionHeading } from "@/components/ui";
 import { foundation } from "@/lib/foundation";
 import type { FocusArea } from "@/lib/foundation";
@@ -135,13 +136,13 @@ export default function FoundationPage() {
             {foundation.gallery.map((shot) => (
               <div
                 key={shot.src}
-                className="relative aspect-[4/3] overflow-hidden bg-smoke"
+                className="group relative aspect-[4/3] overflow-hidden bg-smoke"
               >
-                <Media
+                <FramedMedia
                   src={shot.src}
                   alt={shot.alt}
                   accent={foundation.accent}
-                  imgClassName="transition-transform duration-700 hover:scale-[1.05]"
+                  innerClassName="transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
             ))}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Media } from "@/components/Media";
+import { FramedMedia } from "@/components/FramedMedia";
 import { Container } from "@/components/ui";
 import { getNews, news } from "@/lib/content";
 
@@ -45,7 +45,7 @@ export default async function NotePage({
 
         {item.image && (
           <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden bg-smoke">
-            <Media
+            <FramedMedia
               src={item.image}
               alt={item.title}
               accent={item.accent}

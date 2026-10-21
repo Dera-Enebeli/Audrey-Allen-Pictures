@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Media } from "@/components/Media";
+import { FramedMedia } from "@/components/FramedMedia";
 import { Container } from "@/components/ui";
 import { news } from "@/lib/content";
 
@@ -28,17 +28,17 @@ export default function NotesPage() {
             >
               <Link href={`/notes/${n.slug}`} className="group block">
                 <div
-                  className={`overflow-hidden bg-smoke ${
+                  className={`group overflow-hidden bg-smoke ${
                     i === 0 ? "aspect-[16/7]" : "aspect-[4/3]"
                   }`}
                 >
-                  <Media
+                  <FramedMedia
                     src={n.image}
                     alt={n.title}
                     accent={n.accent}
                     title={n.title}
                     label={n.category}
-                    imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
+                    innerClassName="transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="mt-5 flex items-center gap-3">
