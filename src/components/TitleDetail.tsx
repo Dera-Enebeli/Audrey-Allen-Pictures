@@ -3,6 +3,7 @@ import type { Film, MediaEntry, Series } from "@/lib/content";
 import { genreLabel } from "@/lib/content";
 import { Rail } from "./Rail";
 import { Media } from "./Media";
+import { VideoTile } from "./VideoTile";
 import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
@@ -27,6 +28,7 @@ export function TitleDetail({
   const series = film ? null : (item as Series);
   const trailer = "trailer" in item ? item.trailer : undefined;
   const cast = "cast" in item ? item.cast : undefined;
+  const videos = "videos" in item ? item.videos : undefined;
   const gallery = film?.gallery;
 
   return (
@@ -153,6 +155,20 @@ export function TitleDetail({
         </section>
       )}
 
+      {/* videos — soundtrack, premieres, featurettes */}
+      {videos && videos.length > 0 && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label="Watch" title="Music & Events" />
+            <div className="mt-9 grid gap-x-6 gap-y-12 lg:grid-cols-2">
+              {videos.map((v) => (
+                <VideoTile key={v.youtubeId} video={v} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
       {/* cast */}
       {cast && cast.length > 0 && (
         <section className="border-t border-line py-16 sm:py-24">
@@ -169,7 +185,7 @@ export function TitleDetail({
       {gallery && gallery.length > 0 && (
         <section className="border-t border-line py-16 sm:py-24">
           <Container>
-            <SectionHeading label="From the set" title="Stills" />
+            <SectionHeading label="From the set" title="Stills & Clips" />
             <div className="mt-9">
               <MediaRail entries={gallery} accent={item.accent} fallbackTitle={item.title} />
             </div>
@@ -235,7 +251,7 @@ function MediaRail({
               alt={entry.alt}
               accent={accent}
               title={fallbackTitle}
-              label={entry.video ? "Watch" : "Cast"}
+              label={entry.kind ?? (entry.video ? "Watch" : "Cast")}
               imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
             />
           </div>

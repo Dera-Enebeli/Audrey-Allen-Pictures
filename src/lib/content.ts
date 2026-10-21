@@ -25,6 +25,17 @@ export interface MediaEntry {
   src?: string;
   video?: string;
   alt: string;
+  /** short label override, e.g. "Clip" for video tiles */
+  kind?: string;
+}
+
+/** A YouTube video featured on a title's page (soundtrack, premiere, featurette). */
+export interface VideoEntry {
+  /** YouTube video id — the `v=` / `/shorts/` / `youtu.be/` part */
+  youtubeId: string;
+  title: string;
+  /** short role label, e.g. "Soundtrack" or "Premiere" */
+  kind: string;
 }
 
 export interface Film {
@@ -50,6 +61,8 @@ export interface Film {
   video?: string;
   /** external trailer URL — the "Watch Trailer" buttons appear when set */
   trailer?: string;
+  /** YouTube videos surfaced on the title's page (soundtrack, premieres, featurettes) */
+  videos?: VideoEntry[];
   /** cast photos / clips shown on the title's detail page */
   cast?: MediaEntry[];
   /** production stills shown on the title's detail page */
@@ -71,6 +84,7 @@ export interface Series {
   backdrop?: string;
   video?: string;
   trailer?: string;
+  videos?: VideoEntry[];
   cast?: MediaEntry[];
   /** the source novel, when the series is an adaptation */
   basedOn?: { title: string; author: string; cover: string; synopsis?: string };
@@ -106,6 +120,28 @@ export const films: Film[] = [
       "A romantic drama about two individuals brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal, emotional discovery, and an unexpected journey toward love. Distributed by Kada Entertainment to more than 50 cinemas.",
     poster: "/media/films/i-love-you-regardless/poster.jpg",
     accent: "#4a2b3a",
+    videos: [
+      {
+        youtubeId: "QAxV018wRS8",
+        title: "Francis Atela: I Love You Regardless",
+        kind: "Soundtrack",
+      },
+      {
+        youtubeId: "p_tlUvQf170",
+        title: "I Love You Regardless Movie Premiere",
+        kind: "Premiere",
+      },
+      {
+        youtubeId: "-tRUw_BtdsE",
+        title: "Enyinna Nwigwe at the I Love You Regardless Premiere",
+        kind: "Premiere",
+      },
+      {
+        youtubeId: "Kwbh_mdMIY4",
+        title: "Swanky JK at the I Love You Regardless Premiere",
+        kind: "Premiere",
+      },
+    ],
     cast: [
       { src: "/media/films/i-love-you-regardless/cast/cast-01.jpg", alt: "Cast of I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/cast/cast-02.jpg", alt: "Cast of I Love You Regardless" },
@@ -132,6 +168,9 @@ export const films: Film[] = [
       { src: "/media/films/i-love-you-regardless/stills/still-16.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-17.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-18.jpg", alt: "Production still from I Love You Regardless" },
+      { video: "/media/films/i-love-you-regardless/videos/clip-01.mp4", alt: "I Love You Regardless — clip 1", kind: "Clip" },
+      { video: "/media/films/i-love-you-regardless/videos/clip-02.mp4", alt: "I Love You Regardless — clip 2", kind: "Clip" },
+      { video: "/media/films/i-love-you-regardless/videos/clip-03.mp4", alt: "I Love You Regardless — clip 3", kind: "Clip" },
     ],
   },
   {
@@ -168,6 +207,7 @@ export const films: Film[] = [
       "A reunion meant to rekindle old friendships becomes a nightmare when a group of former friends reunite after years apart, only to discover that the past they have tried so hard to forget is far from buried.\n\nWhat begins as a night of laughter, nostalgia, and celebration soon takes a disturbing turn as strange occurrences, unexplained sounds, and terrifying encounters expose the cracks beneath their carefully constructed lives. As fear spreads and suspicion grows, the friends begin to question one another, unsure of who can be trusted and who may be hiding something far more sinister.\n\nBut the real horror is not just what they hear or see. It is what they remember.\n\nAs buried secrets emerge and the night descends into chaos, the group discovers that their reunion may not be a coincidence. Someone—or something—has brought them together for a reason, and escaping the nightmare may require confronting the truth they have spent years trying to silence.\n\nIn NOISE, the past refuses to stay quiet, guilt becomes a weapon, and every sound could be a warning. When the truth finally comes to light, the survivors must face a terrifying question: will they make it out alive, or will the sins of their past become their final undoing?",
     poster: "/media/films/noise/poster.jpg",
     accent: "#2b2b2b",
+    trailer: "https://youtu.be/M1TQu0G3_8Y",
   },
 ];
 
