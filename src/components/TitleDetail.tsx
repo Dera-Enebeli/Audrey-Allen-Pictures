@@ -4,6 +4,7 @@ import { genreLabel } from "@/lib/content";
 import { Rail } from "./Rail";
 import { Media } from "./Media";
 import { VideoTile } from "./VideoTile";
+import { ClipPlayer } from "./ClipPlayer";
 import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
@@ -29,7 +30,8 @@ export function TitleDetail({
   const trailer = "trailer" in item ? item.trailer : undefined;
   const cast = "cast" in item ? item.cast : undefined;
   const videos = "videos" in item ? item.videos : undefined;
-  const bts = film?.bts;
+  const bts = "bts" in item ? item.bts : undefined;
+  const clips = "clips" in item ? item.clips : undefined;
   const gallery = film?.gallery;
 
   return (
@@ -218,9 +220,30 @@ export function TitleDetail({
       {gallery && gallery.length > 0 && (
         <section className="border-t border-line py-16 sm:py-24">
           <Container>
-            <SectionHeading label="From the set" title="Stills & Clips" />
+            <SectionHeading label="From the set" title="Stills" />
             <div className="mt-9">
               <MediaRail entries={gallery} accent={item.accent} fallbackTitle={item.title} />
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* featured clips — own section, full player controls */}
+      {clips && clips.length > 0 && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label="Watch" title="Clips" />
+            <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {clips.map((c) => (
+                <ClipPlayer
+                  key={c.src}
+                  src={c.src}
+                  title={c.title}
+                  kind={c.kind}
+                  caption={c.caption}
+                  accent={item.accent}
+                />
+              ))}
             </div>
           </Container>
         </section>

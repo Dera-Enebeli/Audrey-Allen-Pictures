@@ -69,6 +69,11 @@ export interface Film {
   gallery?: MediaEntry[];
   /** featured behind-the-scenes clip — gets its own section on the page */
   bts?: { video: string; title: string; kind: string; caption?: string };
+  /**
+   * Featured clips given their own section with full player controls
+   * (play/pause, scrub, volume, fullscreen).
+   */
+  clips?: { src: string; title: string; kind: string; caption?: string }[];
   /** hex colour used for the typographic fallback tile */
   accent: string;
 }
@@ -88,6 +93,8 @@ export interface Series {
   trailer?: string;
   videos?: VideoEntry[];
   cast?: MediaEntry[];
+  /** featured behind-the-scenes clip — gets its own section on the page */
+  bts?: { video: string; title: string; kind: string; caption?: string };
   /** the source novel, when the series is an adaptation */
   basedOn?: { title: string; author: string; cover: string; synopsis?: string };
   accent: string;
@@ -122,6 +129,29 @@ export const films: Film[] = [
       "A romantic drama about two individuals brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal, emotional discovery, and an unexpected journey toward love. Distributed by Kada Entertainment to more than 50 cinemas.",
     poster: "/media/films/i-love-you-regardless/poster.jpg",
     accent: "#4a2b3a",
+    clips: [
+      {
+        src: "/media/films/i-love-you-regardless/videos/clip-01.mp4",
+        title: "I Love You Regardless — Clip One",
+        kind: "From the film",
+        caption:
+          "A scene from I Love You Regardless, Audrey Allen Pictures' romantic drama distributed to more than 50 cinemas.",
+      },
+      {
+        src: "/media/films/i-love-you-regardless/videos/clip-02.mp4",
+        title: "I Love You Regardless — Clip Two",
+        kind: "From the film",
+        caption:
+          "Two strangers, one impossible arrangement: the cohabitation that turns conflict into an unexpected journey toward love.",
+      },
+      {
+        src: "/media/films/i-love-you-regardless/videos/clip-03.mp4",
+        title: "I Love You Regardless — Clip Three",
+        kind: "From the film",
+        caption:
+          "Betrayal, emotional discovery and the difficult work of learning to trust again.",
+      },
+    ],
     videos: [
       {
         youtubeId: "QAxV018wRS8",
@@ -152,9 +182,6 @@ export const films: Film[] = [
       { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Cast of I Love You Regardless" },
     ],
     gallery: [
-      { video: "/media/films/i-love-you-regardless/videos/clip-01.mp4", alt: "I Love You Regardless — clip 1", kind: "Clip" },
-      { video: "/media/films/i-love-you-regardless/videos/clip-02.mp4", alt: "I Love You Regardless — clip 2", kind: "Clip" },
-      { video: "/media/films/i-love-you-regardless/videos/clip-03.mp4", alt: "I Love You Regardless — clip 3", kind: "Clip" },
       { src: "/media/films/i-love-you-regardless/stills/still-01.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-02.jpg", alt: "Production still from I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/stills/still-03.jpg", alt: "Production still from I Love You Regardless" },
@@ -240,6 +267,15 @@ export const series: Series[] = [
         "Redcrest High is a compelling exploration of adolescent life, examining the social pressures, personal conflicts, and moral dilemmas that shape young people during one of the most critical stages of their development.\n\nSet against the backdrop of high school, the book examines the realities of growing up in an environment where academic expectations, social hierarchies, peer influence, family pressures, and the pursuit of acceptance often compete with personal values and sound judgment. As students navigate friendships, relationships, identity, ambition, and the consequences of their decisions, they are confronted with challenges that test their emotional maturity, integrity, and sense of responsibility.\n\nThe book addresses issues that significantly influence adolescent behaviour, including bullying, discrimination, manipulation, unhealthy relationships, dishonesty, insecurity, and the pressure to conform. It explores how these experiences affect self-esteem, academic performance, interpersonal relationships, and the development of personal values. It also considers the role of family, educators, and the wider school community in shaping young people's attitudes, choices, and understanding of right and wrong.\n\nBeyond its portrayal of school life, Redcrest High offers an educational perspective on the relationship between individual decisions and their wider consequences. It encourages young readers to examine their attitudes, recognise harmful patterns of behaviour, develop critical thinking skills, and understand the importance of accountability, empathy, respect, and responsible decision-making.\n\nDesigned to stimulate reflection and meaningful discussion among students, parents, and educators, the book provides an opportunity to address the social and emotional challenges of adolescence in a relatable and constructive manner.\n\nUltimately, Redcrest High is a story about character formation, personal responsibility, and the transition from adolescence to adulthood. It reinforces the importance of making informed choices, establishing healthy boundaries, resisting destructive influences, and recognising that the values developed during the school years can have a lasting impact on an individual's future.\n\nGenre: Young Adult Fiction | Educational Drama | Social Development\n\nTarget Audience: Secondary school students, educators, parents, and organisations committed to adolescent development and education.",
     },
     cast: [
+      { src: "/media/series/red-crest-high/cast/cast-18.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-19.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-20.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-21.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-22.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-23.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-24.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-25.jpg", alt: "Cast of Red Crest High" },
+      { src: "/media/series/red-crest-high/cast/cast-26.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-01.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-02.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-03.jpg", alt: "Cast of Red Crest High" },
@@ -257,17 +293,14 @@ export const series: Series[] = [
       { src: "/media/series/red-crest-high/cast/cast-15.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-16.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-17.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-18.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-19.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-20.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-21.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-22.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-23.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-24.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-25.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-26.jpg", alt: "Cast of Red Crest High" },
-      { video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4", alt: "Behind the scenes of Red Crest High" },
     ],
+    bts: {
+      video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4",
+      title: "Red Crest High",
+      kind: "Behind the scenes",
+      caption:
+        "From the set of Red Crest High — the ensemble and crew bringing Tosin Allen's novel to the screen.",
+    },
   },
 ];
 
