@@ -73,7 +73,14 @@ export interface Film {
    * Featured clips given their own section with full player controls
    * (play/pause, scrub, volume, fullscreen).
    */
-  clips?: { src: string; title: string; kind: string; caption?: string }[];
+  clips?: {
+    src: string;
+    /** frame shown before playback — without this the player looks empty */
+    poster?: string;
+    title: string;
+    kind: string;
+    caption?: string;
+  }[];
   /** hex colour used for the typographic fallback tile */
   accent: string;
 }
@@ -132,6 +139,7 @@ export const films: Film[] = [
     clips: [
       {
         src: "/media/films/i-love-you-regardless/videos/clip-01.mp4",
+        poster: "/media/films/i-love-you-regardless/videos/poster-01.jpg",
         title: "I Love You Regardless — Clip One",
         kind: "From the film",
         caption:
@@ -139,6 +147,7 @@ export const films: Film[] = [
       },
       {
         src: "/media/films/i-love-you-regardless/videos/clip-02.mp4",
+        poster: "/media/films/i-love-you-regardless/videos/poster-02.jpg",
         title: "I Love You Regardless — Clip Two",
         kind: "From the film",
         caption:
@@ -146,6 +155,7 @@ export const films: Film[] = [
       },
       {
         src: "/media/films/i-love-you-regardless/videos/clip-03.mp4",
+        poster: "/media/films/i-love-you-regardless/videos/poster-03.jpg",
         title: "I Love You Regardless — Clip Three",
         kind: "From the film",
         caption:

@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
  */
 export function ClipPlayer({
   src,
+  poster,
   title,
   kind,
   caption,
@@ -17,6 +18,7 @@ export function ClipPlayer({
   lead = false,
 }: {
   src: string;
+  poster?: string;
   title: string;
   kind: string;
   caption?: string;
@@ -48,7 +50,7 @@ export function ClipPlayer({
   }, []);
 
   return (
-    <figure className={lead ? "" : "mx-auto w-full max-w-[420px] lg:max-w-none"}>
+    <figure className={lead ? "" : "mx-auto w-full max-w-[340px] sm:max-w-none"}>
       <div
         ref={wrapRef}
         className={`relative overflow-hidden bg-black ${
@@ -59,8 +61,9 @@ export function ClipPlayer({
           <video
             // Native controls: the visitor drives playback.
             controls
-            preload="metadata"
+            preload="none"
             playsInline
+            poster={poster}
             onError={() => setFailed(true)}
             className="h-full w-full object-cover"
             style={{ backgroundColor: accent }}
@@ -68,6 +71,18 @@ export function ClipPlayer({
             <source src={src} type="video/mp4" />
             Your browser cannot play this clip.
           </video>
+        ) : poster && !failed ? (
+          // Pre-load state: show the frame so the section never reads as an
+          // empty black box.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={poster}
+            alt={`${title} — video still`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div
             className="flex h-full w-full flex-col justify-between p-5"

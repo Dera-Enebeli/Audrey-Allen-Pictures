@@ -173,7 +173,7 @@ export function TitleDetail({
                 </p>
                 {series.basedOn.synopsis && (
                   <details className="mt-8">
-                    <summary className="flex items-center gap-2 label cursor-pointer select-none transition-colors hover:opacity-70 list-none">
+                    <summary className="flex min-h-11 items-center gap-2 label cursor-pointer select-none transition-colors hover:opacity-70 list-none">
                       <span>About the novel</span>
                       <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                     </summary>
@@ -233,11 +233,12 @@ export function TitleDetail({
         <section className="border-t border-line py-16 sm:py-24">
           <Container>
             <SectionHeading label="Watch" title="Clips" />
-            <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {clips.map((c) => (
                 <ClipPlayer
                   key={c.src}
                   src={c.src}
+                  poster={c.poster}
                   title={c.title}
                   kind={c.kind}
                   caption={c.caption}

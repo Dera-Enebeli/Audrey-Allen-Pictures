@@ -169,7 +169,7 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
               </h3>
               {p.synopsis && (
                 <details className="mt-4">
-                  <summary className="flex items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                  <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
                     <span>Synopsis</span>
                     <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                   </summary>
