@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { films, news, series } from "@/lib/content";
+import { films, series } from "@/lib/content";
 
 const staticPages = [
   "",
@@ -8,7 +8,6 @@ const staticPages = [
   "/series",
   "/foundation",
   "/about",
-  "/notes",
   "/terms",
   "/privacy",
 ];
@@ -30,11 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/series/${s.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
-    })),
-    ...news.map((n) => ({
-      url: `${base}/notes/${n.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
     })),
   ];
 }

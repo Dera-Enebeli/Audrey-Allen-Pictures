@@ -1,10 +1,10 @@
 import Link from "next/link";
-import type { Film, NewsItem, UpcomingProject } from "@/lib/content";
+import type { Film, UpcomingProject } from "@/lib/content";
 import { genreLabel } from "@/lib/content";
 import { Backdrop } from "./Backdrop";
 import { FramedMedia } from "./FramedMedia";
 import { Button, Container, SectionHeading } from "./ui";
-import { ArrowUpRight, PlayIcon } from "./Icons";
+import { PlayIcon } from "./Icons";
 
 /* ------------------------------- Feature -------------------------------- */
 
@@ -52,7 +52,19 @@ export function Feature({ film }: { film: Film }) {
               <p className="mt-3 text-[1.05rem] italic text-ash">{film.tagline}</p>
             )}
             <p className="mt-5 max-w-prose leading-relaxed text-ink/80">
-              {film.synopsis}
+              {film.synopsis && (
+                <details className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                  <summary className="flex min-h-11 items-center gap-2">
+                    <span>Synopsis</span>
+                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                  </summary>
+                  <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
+                    {film.synopsis.split('\n\n').map((para, i) => (
+                      <p key={i} className="mb-4">{para}</p>
+                    ))}
+                  </div>
+                </details>
+              )}
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6">
@@ -86,49 +98,6 @@ function Meta({ label, value }: { label: string; value: string }) {
       <dt className="label text-ash">{label}</dt>
       <dd className="mt-1.5 text-[0.95rem] leading-snug">{value}</dd>
     </div>
-  );
-}
-
-/* -------------------------------- News ---------------------------------- */
-
-export function NewsSection({ items }: { items: NewsItem[] }) {
-  return (
-    <section className="border-t border-line py-16 sm:py-24">
-      <Container>
-        <SectionHeading label="Latest" title="Notes" href="/notes" />
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((n) => (
-            <Link key={n.slug} href={`/notes/${n.slug}`} className="group block">
-              <div className="relative aspect-[4/3] overflow-hidden bg-smoke">
-                <FramedMedia
-                  src={n.image}
-                  alt={n.title}
-                  accent={n.accent}
-                  title={n.title}
-                  label={n.category}
-                  innerClassName="transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="mt-4 flex items-center gap-3">
-                <span className="label text-ash">{n.category}</span>
-                <span className="h-1 w-1 rounded-full bg-ash" />
-                <span className="label text-ash tabular-nums">{n.date}</span>
-              </div>
-              <h3 className="mt-2 font-sans text-[1.15rem] font-medium leading-tight tracking-[-0.01em]">
-                {n.title}
-              </h3>
-              <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">
-                {n.excerpt}
-              </p>
-              <span className="label mt-3 inline-flex items-center gap-1.5 text-ink">
-                Read
-                <ArrowUpRight className="h-3 w-3" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Container>
-    </section>
   );
 }
 

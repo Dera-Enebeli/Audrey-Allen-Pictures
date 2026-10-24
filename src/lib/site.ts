@@ -37,7 +37,6 @@ export const site = {
     { label: "Series", href: "/series" },
     { label: "Foundation", href: "/foundation" },
     { label: "Studio", href: "/about" },
-    { label: "News", href: "/notes" },
   ],
 
   /** Right-hand utility nav in the header */
@@ -60,7 +59,6 @@ export const site = {
           { label: "Film", href: "/films" },
           { label: "Series", href: "/series" },
           { label: "Foundation", href: "/foundation" },
-          { label: "News", href: "/notes" },
           { label: "Studio", href: "/about" },
         ],
       },

@@ -1,19 +1,15 @@
 import { Hero } from "@/components/Hero";
 import { Rail } from "@/components/Rail";
 import { PosterCard } from "@/components/cards";
-import {
-  Feature,
-  NewsSection,
-  UpcomingSection,
-} from "@/components/Sections";
+import { Feature, UpcomingSection } from "@/components/Sections";
 import { Container, SectionHeading } from "@/components/ui";
 import { Media } from "@/components/Media";
 import { railCell } from "@/components/cards";
-import { films, heroSlides, news, series, upcomingProjects } from "@/lib/content";
+import { films, heroSlides, series, upcomingProjects } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function HomePage() {
-  const feature = films.find((f) => f.status === "In Cinemas") ?? films[0];
+  const feature = films[0];
 
   return (
     <>
@@ -80,8 +76,6 @@ export default function HomePage() {
       </section>
 
       <UpcomingSection items={upcomingProjects} />
-
-      <NewsSection items={news} />
     </>
   );
 }

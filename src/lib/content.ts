@@ -100,22 +100,12 @@ export interface Series {
   trailer?: string;
   videos?: VideoEntry[];
   cast?: MediaEntry[];
+  /** production stills shown on the title's detail page */
+  stills?: MediaEntry[];
   /** featured behind-the-scenes clip — gets its own section on the page */
   bts?: { video: string; title: string; kind: string; caption?: string };
   /** the source novel, when the series is an adaptation */
   basedOn?: { title: string; author: string; cover: string; synopsis?: string };
-  accent: string;
-}
-
-export interface NewsItem {
-  slug: string;
-  date: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  /** paragraphs shown on the article page */
-  body: string[];
-  image?: string;
   accent: string;
 }
 
@@ -220,7 +210,7 @@ export const films: Film[] = [
     genres: [],
     director: "Audrey Allen Pictures",
     synopsis:
-      "A new feature from Audrey Allen Pictures. Synopsis, cast and release details to be announced.",
+      "Kim, a talented New York photographer has spent her life yearning for the family she never had. She believes she has finally found it when she falls for Femi Ajala, a wealthy, but deeply troubled Nigerian businessman. Femi is captivated by Kim from the moment he sees her in a coffee shop, ignoring the advances of one of her closest friends, Ashley. Their attraction quickly becomes an intense romance, and before long, Femi proposes.\n\nBut Femi is strangely protective of his family and reluctant to let Kim into his world. After their engagement, Kim discovers why. Femi's mother, a racist is openly hostile toward her, convinced her son should marry a Nigerian or African woman who understands and respects family culture and traditions. Though she reluctantly accepts the marriage, she never hides her resentment toward the woman she considers an outsider.\n\nFor Kim, marriage represents the beginning of the family she has always dreamed of. She is eager to remove the birth control implant she has used for years and start having children. But Femi shocks her with a revelation: he does not want children. Their disagreement becomes a growing source of conflict, forcing Kim to compromise her deepest desire of having children to preserve their marriage.\n\nThen Kim's only surviving relative is diagnosed with cancer and undergoes an emergency preventive hysterectomy. Watching the possibility of motherhood disappear from someone she loves reignites Kim's determination to have a child of her own. She refuses to compromise again. The resulting battles push an already fragile marriage toward collapse, and Femi begins cheating on her repeatedly.\n\nEventually, he decides he wants a divorce. Kim is devastated. Femi's mother is delighted at the prospect of finally getting rid of the white girl, while Ashley, Kim's supposedly loyal friend, secretly nurses a bitter resentment toward her. But as Kim struggles to rebuild her life, she begins to realize that Femi's betrayal is only the beginning.\n\nFemi has been hiding something far more dangerous. When his trusted ally betrays him, federal authorities move against Femi, exposing a shocking secret involving his family and a human trafficking operation. Suddenly, the wealthy, sophisticated businessman Kim married is revealed to be connected to a world of deception and criminality she never imagined.\n\nAt the worst possible moment, Kim discovers she is pregnant.\n\nThe child she fought so desperately to have could now be the last connection binding her to her husband, a criminal with unforgivable secrets.\n\nBeguiled is a romantic drama about love, betrayal, motherhood, family expectations and the devastating consequences of discovering that the person you love and trusted most may have been living a lie.",
     poster: "/media/films/beguiled/poster.jpg",
     accent: "#241c2e",
     cast: [
@@ -294,15 +284,17 @@ export const series: Series[] = [
       { src: "/media/series/red-crest-high/cast/cast-15.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-16.jpg", alt: "Cast of Red Crest High" },
       { src: "/media/series/red-crest-high/cast/cast-17.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-18.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-19.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-20.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-21.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-22.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-23.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-24.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-25.jpg", alt: "Cast of Red Crest High" },
-      { src: "/media/series/red-crest-high/cast/cast-26.jpg", alt: "Cast of Red Crest High" },
+    ],
+    stills: [
+      { src: "/media/series/red-crest-high/stills/still-18.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-19.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-20.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-21.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-22.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-23.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-24.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-25.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-26.jpg", alt: "Production still from Red Crest High" },
     ],
     bts: {
       video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4",
@@ -387,56 +379,6 @@ export const partners = {
   note: "Distributed by Kada Entertainment to more than 50 cinemas.",
 };
 
-/* ------------------------------- News ---------------------------------- */
-
-export const news: NewsItem[] = [
-  {
-    slug: "i-love-you-regardless-in-cinemas",
-    date: "2026",
-    category: "Release",
-    title: "I Love You Regardless arrives in cinemas",
-    excerpt:
-      "Our romantic drama opens across more than 50 cinemas, distributed by Kada Entertainment.",
-    body: [
-      "Our romantic drama I Love You Regardless has arrived in cinemas, distributed by Kada Entertainment to more than 50 cinemas.",
-      "The film follows two strangers brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal and emotional discovery — and an unexpected journey toward love.",
-      "For screening times, check your local cinema listings. For broadcast, streaming and international distribution enquiries, get in touch with the studio.",
-    ],
-    image: "/media/news/i-love-you-regardless.jpg",
-    accent: "#4a2b3a",
-  },
-  {
-    slug: "slate",
-    date: "2026",
-    category: "Studio",
-    title: "Beguiled, Noise and Red Crest High in development",
-    excerpt:
-      "Our slate grows with two feature films and our first original series.",
-    body: [
-      "Our slate continues to grow. Beguiled and Noise — two new feature films — are in development, alongside Red Crest High, our first original television series.",
-      "All three titles are being developed by Audrey Allen Pictures, with synopsis, casting and release details to be announced.",
-      "Follow the studio for updates as these productions move forward.",
-    ],
-    image: "/media/films/beguiled/poster.jpg",
-    accent: "#241c2e",
-  },
-  {
-    slug: "partnerships",
-    date: "2026",
-    category: "Partnerships",
-    title: "Open to international co-productions",
-    excerpt:
-      "We are building relationships with international distributors, streaming platforms, broadcasters, investors and sponsors.",
-    body: [
-      "We are actively building relationships with international distributors, streaming platforms, broadcasters, investors, corporate sponsors and tourism organizations.",
-      "Our aim is simple: to bring stories that celebrate African culture to audiences across Africa and around the world — through co-productions, licensing and long-term partnerships.",
-      "If you're a distributor, platform, sponsor or financier interested in working with us, we'd like to hear from you.",
-    ],
-    image: "/media/series/red-crest-high/poster.jpg",
-    accent: "#3a5a4a",
-  },
-];
-
 /* --------------------------- Upcoming projects -------------------------- */
 
 export interface UpcomingProject {
@@ -492,10 +434,6 @@ export function getFilm(slug: string): Film | undefined {
 
 export function getSeries(slug: string): Series | undefined {
   return series.find((s) => s.slug === slug);
-}
-
-export function getNews(slug: string): NewsItem | undefined {
-  return news.find((n) => n.slug === slug);
 }
 
 export function relatedFilms(slug: string, count = 4): Film[] {
