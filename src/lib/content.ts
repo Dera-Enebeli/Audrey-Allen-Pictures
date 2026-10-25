@@ -179,6 +179,9 @@ export const films: Film[] = [
       { src: "/media/films/i-love-you-regardless/cast/cast-03.jpg", alt: "Cast of I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/cast/cast-04.jpg", alt: "Cast of I Love You Regardless" },
       { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-06.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-07.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-08.jpg", alt: "Cast of I Love You Regardless" },
     ],
     gallery: [
       { src: "/media/films/i-love-you-regardless/stills/still-01.jpg", alt: "Production still from I Love You Regardless" },
