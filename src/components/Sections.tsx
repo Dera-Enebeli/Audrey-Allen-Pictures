@@ -51,7 +51,7 @@ export function Feature({ film }: { film: Film }) {
             {film.tagline && (
               <p className="mt-3 text-[1.05rem] italic text-ash">{film.tagline}</p>
             )}
-            <p className="mt-5 max-w-prose leading-relaxed text-ink/80">
+            <div className="mt-5 max-w-prose leading-relaxed text-ink/80">
               {film.synopsis && (
                 <>
                   <span className="details-teaser block mb-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70">
@@ -70,7 +70,7 @@ export function Feature({ film }: { film: Film }) {
                   </details>
                 </>
               )}
-            </p>
+            </div>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6">
               <Meta label="Genre" value={genreLabel(film)} />

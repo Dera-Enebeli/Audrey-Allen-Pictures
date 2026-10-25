@@ -289,14 +289,10 @@ export const series: Series[] = [
     ],
     stills: [
       { src: "/media/series/red-crest-high/stills/still-18.jpg", alt: "Production still from Red Crest High" },
-      { src: "/media/series/red-crest-high/stills/still-19.jpg", alt: "Production still from Red Crest High" },
-      { src: "/media/series/red-crest-high/stills/still-20.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-21.jpg", alt: "Production still from Red Crest High" },
-      { src: "/media/series/red-crest-high/stills/still-22.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-23.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-24.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-25.jpg", alt: "Production still from Red Crest High" },
-      { src: "/media/series/red-crest-high/stills/still-26.jpg", alt: "Production still from Red Crest High" },
     ],
     bts: {
       video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4",
