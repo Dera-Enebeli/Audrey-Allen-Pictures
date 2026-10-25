@@ -15,20 +15,24 @@ export default function HomePage() {
     <>
       {/* brand logo video — the studio's mark, shown once, first before everything else */}
       <section id="brand-logo" className="border-t border-line py-16 sm:py-24">
-        <Container className="max-w-3xl mx-auto">
-          {/* LOGO.mp4 is portrait 3:4 — frame it at its native ratio so
-              the whole animation stays visible */}
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden sm:max-w-[360px]">
-            <Media
-              video="/media/brand/LOGO.mp4"
-              alt="Audrey Allen Pictures Brand Logo"
-              accent="#4a2b3a"
-              title={site.brand.name}
-              label="The studio"
-              priority
-            />
-          </div>
-        </Container>
+        <div className="relative aspect-[16/9] w-full overflow-hidden">
+          {/* blurred backdrop behind the logo, like the pictures */}
+          <div className="absolute inset-0 bg-[#4a2b3a]" />
+          <div
+            className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(74,43,58,0.85),rgba(36,28,46,0))]"
+            style={{ filter: "blur(50px)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/70" />
+          <Media
+            video="/media/brand/LOGO.mp4"
+            alt="Audrey Allen Pictures Brand Logo"
+            accent="#4a2b3a"
+            title={site.brand.name}
+            label="The studio"
+            priority
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
       </section>
 
       <Hero slides={heroSlides} />
