@@ -30,7 +30,7 @@ export default function HomePage() {
             title={site.brand.name}
             label="The studio"
             priority
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0"
           />
         </div>
       </section>
@@ -39,41 +39,31 @@ export default function HomePage() {
 
       <Feature film={feature} />
 
-      {/* Films */}
+      {/* The Slate — films & series in one connected rail */}
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
-          <SectionHeading label="The Slate" title="Films" href="/films" />
+          <SectionHeading label="The Slate" title="Films & Series" href="/films" />
           <div className="mt-9">
             <Rail>
-              {films.map((f) => (
-                <PosterCard
-                  key={f.slug}
-                  item={f}
-                  href={`/films/${f.slug}`}
-                  kind="film"
-                  className={railCell}
-                />
-              ))}
-            </Rail>
-          </div>
-        </Container>
-      </section>
-
-      {/* Series */}
-      <section className="border-t border-line py-16 sm:py-24">
-        <Container>
-          <SectionHeading label="Television" title="Series" href="/series" />
-          <div className="mt-9">
-            <Rail>
-              {series.map((s) => (
-                <PosterCard
-                  key={s.slug}
-                  item={s}
-                  href={`/series/${s.slug}`}
-                  kind="series"
-                  className={railCell}
-                />
-              ))}
+              {[...films, ...series].map((item) =>
+                "seasonLabel" in item ? (
+                  <PosterCard
+                    key={item.slug}
+                    item={item}
+                    href={`/series/${item.slug}`}
+                    kind="series"
+                    className={railCell}
+                  />
+                ) : (
+                  <PosterCard
+                    key={item.slug}
+                    item={item}
+                    href={`/films/${item.slug}`}
+                    kind="film"
+                    className={railCell}
+                  />
+                ),
+              )}
             </Rail>
           </div>
         </Container>
