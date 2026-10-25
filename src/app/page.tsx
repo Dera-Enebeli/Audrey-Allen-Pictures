@@ -13,9 +13,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero slides={heroSlides} />
-
-      {/* brand logo video — the studio's mark, shown once */}
+      {/* brand logo video — the studio's mark, shown once, first before everything else */}
       <section id="brand-logo" className="border-t border-line py-16 sm:py-24">
         <Container className="max-w-3xl mx-auto">
           {/* LOGO.mp4 is portrait 3:4 — frame it at its native ratio so
@@ -32,6 +30,8 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      <Hero slides={heroSlides} />
 
       <Feature film={feature} />
 
