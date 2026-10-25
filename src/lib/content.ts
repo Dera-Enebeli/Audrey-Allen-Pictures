@@ -14,7 +14,6 @@
 // ---------------------------------------------------------------------------
 
 export type FilmStatus =
-  | "In Cinemas"
   | "Coming Soon"
   | "Streaming"
   | "In Production"
@@ -42,7 +41,8 @@ export interface Film {
   slug: string;
   title: string;
   year: number;
-  status: FilmStatus;
+  /** Present while the title carries a status; omitted when it doesn't apply. */
+  status?: FilmStatus;
   /** Small date / window shown on the poster badge, e.g. "Now Showing" */
   releaseLabel?: string;
   genres: string[];
@@ -89,7 +89,7 @@ export interface Series {
   slug: string;
   title: string;
   year: number;
-  status: FilmStatus;
+  status?: FilmStatus;
   network?: string;
   seasonLabel: string;
   genres: string[];
@@ -116,7 +116,6 @@ export const films: Film[] = [
     slug: "i-love-you-regardless",
     title: "I Love You Regardless",
     year: 2025,
-    status: "In Cinemas",
     releaseLabel: "Now Showing",
     genres: ["Romance", "Drama"],
     director: "Audrey Allen Pictures",

@@ -42,10 +42,12 @@ export function PosterCard({
             imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
           />
         </span>
-        <span className="label mt-4 flex items-center">
-          {item.status}
-          <span className="ml-1.5 h-1 w-1 rounded-full bg-gold" />
-        </span>
+        {item.status && (
+          <span className="label mt-4 flex items-center">
+            {item.status}
+            <span className="ml-1.5 h-1 w-1 rounded-full bg-gold" />
+          </span>
+        )}
         <span className="mt-2.5 block font-sans text-[1.35rem] font-medium leading-[1.08] tracking-[-0.005em] text-ash transition-colors group-hover:text-ink sm:text-[1.5rem]">
           {item.title}
         </span>

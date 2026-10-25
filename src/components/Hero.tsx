@@ -33,9 +33,6 @@ export function Hero({ slides }: { slides: Film[] }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
 
           <Container className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
-            <p className="label text-white/75">
-              {/* status display removed - no movie is currently in cinemas */}
-            </p>
             {i === 0 ? (
               <h1 className={headingCls}>{slide.title}</h1>
             ) : (

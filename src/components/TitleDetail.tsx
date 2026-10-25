@@ -33,7 +33,7 @@ export function TitleDetail({
   const videos = "videos" in item ? item.videos : undefined;
   const bts = "bts" in item ? item.bts : undefined;
   const clips = "clips" in item ? item.clips : undefined;
-  const gallery = film?.gallery;
+  const gallery = film?.gallery ?? ("stills" in item ? item.stills : undefined);
 
   return (
     <div>
@@ -52,11 +52,13 @@ export function TitleDetail({
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/30" />
         <Container className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
           <div className="animate-fade-up max-w-3xl">
-            <StatusBadge
-              status={item.status}
-              releaseLabel={film?.releaseLabel}
-              tone="paper"
-            />
+            {item.status && (
+              <StatusBadge
+                status={item.status}
+                releaseLabel={film?.releaseLabel}
+                tone="paper"
+              />
+            )}
             <h1 className="mt-5 font-sans text-[2.75rem] font-medium leading-[0.9] tracking-[-0.035em] text-white sm:text-[4.5rem] lg:text-[5.5rem]">
               {item.title}
             </h1>
@@ -105,7 +107,9 @@ export function TitleDetail({
                 {series?.seasonLabel && (
                   <Meta label="Season" value={series.seasonLabel} />
                 )}
-                <Meta label="Status" value={item.status} />
+                {item.status && (
+                  <Meta label="Status" value={item.status} />
+                )}
               </dl>
             </div>
           </div>

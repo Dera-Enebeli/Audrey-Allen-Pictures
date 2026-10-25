@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Film, Series } from "@/lib/content";
+import type { Film, Series, FilmStatus } from "@/lib/content";
 import { PosterCard } from "./cards";
 import { Container } from "./ui";
 
@@ -15,8 +15,15 @@ export function CatalogueGrid({
   kind?: "film" | "series";
 }) {
   const statuses = useMemo(
-    () => Array.from(new Set(items.map((i) => i.status))),
-    [items]
+    () =>
+      Array.from(
+        new Set(
+          items
+            .map((i) => i.status)
+            .filter((s): s is FilmStatus => Boolean(s)),
+        ),
+      ),
+    [items],
   );
   const [filter, setFilter] = useState("All");
   const shown =
