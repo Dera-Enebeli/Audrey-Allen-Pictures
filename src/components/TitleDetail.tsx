@@ -89,9 +89,19 @@ export function TitleDetail({
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <h2 className="label text-ash">Synopsis</h2>
-              <p className="mt-6 font-sans text-[1.3rem] font-medium leading-[1.4] tracking-[-0.015em] sm:text-[1.6rem]">
-                {item.synopsis}
-              </p>
+              {item.synopsis && (
+                <details className="mt-6">
+                  <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                    <span>Read more</span>
+                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                  </summary>
+                  <div className="mt-3">
+                    {item.synopsis.split("\n\n").map((para, i) => (
+                      <p key={i} className="mb-4 font-sans text-[1.3rem] font-medium leading-[1.4] tracking-[-0.015em] sm:text-[1.6rem]">{para}</p>
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
 
             <div className="lg:col-span-5">

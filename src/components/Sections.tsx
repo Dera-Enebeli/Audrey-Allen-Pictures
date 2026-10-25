@@ -55,7 +55,7 @@ export function Feature({ film }: { film: Film }) {
               {film.synopsis && (
                 <details className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
                   <summary className="flex min-h-11 items-center gap-2">
-                    <span>Synopsis</span>
+                    <span>Read more</span>
                     <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                   </summary>
                   <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
@@ -139,7 +139,7 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
               {p.synopsis && (
                 <details className="mt-4">
                   <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
-                    <span>Synopsis</span>
+                    <span>Read more</span>
                     <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
                   </summary>
                   <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
