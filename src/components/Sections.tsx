@@ -112,6 +112,8 @@ function Meta({ label, value }: { label: string; value: string }) {
  * Teaser grid for in-development titles. Cards are deliberately not linked
  * yet — they start linking to detail pages once real project info arrives.
  */
+export { Spotlight } from "./Spotlight";
+
 export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
   if (!items.length) return null;
   return (

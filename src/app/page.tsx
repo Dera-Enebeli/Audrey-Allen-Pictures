@@ -1,22 +1,21 @@
 import { LogoHero } from "@/components/Hero";
 import { Rail } from "@/components/Rail";
 import { PosterCard } from "@/components/cards";
-import { Feature, UpcomingSection } from "@/components/Sections";
+import { Spotlight, UpcomingSection } from "@/components/Sections";
 import { Container, SectionHeading } from "@/components/ui";
 import { railCell } from "@/components/cards";
 import { films, series, upcomingProjects } from "@/lib/content";
 
 export default function HomePage() {
-  const feature = films[0];
+  // Curated spotlight — not just the first film, but a deliberate choice
+  const spotlight = films.find((f) => f.slug === "i-love-you-regardless") ?? films[0];
 
   return (
     <>
       {/* homepage hero — just the studio's logo animation, full height & weight */}
       <LogoHero />
 
-      <Feature film={feature} />
-
-      {/* The Slate — films & series in one connected rail */}
+      {/* The Slate — the catalogue comes first, this IS the work */}
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
           <SectionHeading label="The Slate" title="Films & Series" href="/films" />
@@ -45,6 +44,9 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Spotlight — editorial focus on one title (curated, not automatic) */}
+      <Spotlight item={spotlight} />
 
       <UpcomingSection items={upcomingProjects} />
     </>
