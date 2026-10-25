@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Film, MediaEntry, Series } from "@/lib/content";
-import { genreLabel } from "@/lib/content";
+import { genreLabel, synopsisTeaser } from "@/lib/content";
 import { Rail } from "./Rail";
 import { Media } from "./Media";
 import { VideoTile } from "./VideoTile";
@@ -90,17 +90,22 @@ export function TitleDetail({
             <div className="lg:col-span-7">
               <h2 className="label text-ash">Synopsis</h2>
               {item.synopsis && (
-                <details className="mt-6">
-                  <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
-                    <span>Read more</span>
-                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
-                  </summary>
-                  <div className="mt-3">
-                    {item.synopsis.split("\n\n").map((para, i) => (
-                      <p key={i} className="mb-4 font-sans text-[1.3rem] font-medium leading-[1.4] tracking-[-0.015em] sm:text-[1.6rem]">{para}</p>
-                    ))}
-                  </div>
-                </details>
+                <>
+                  <p className="details-teaser mb-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70">
+                    {synopsisTeaser(item.synopsis)}
+                  </p>
+                  <details className="mt-6">
+                    <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                      <span>Read more</span>
+                      <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                    </summary>
+                    <div className="mt-3">
+                      {item.synopsis.split("\n\n").map((para, i) => (
+                        <p key={i} className="mb-4 font-sans text-[1.3rem] font-medium leading-[1.4] tracking-[-0.015em] sm:text-[1.6rem]">{para}</p>
+                      ))}
+                    </div>
+                  </details>
+                </>
               )}
             </div>
 

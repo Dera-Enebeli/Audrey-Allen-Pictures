@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Film, UpcomingProject } from "@/lib/content";
-import { genreLabel } from "@/lib/content";
+import { genreLabel, synopsisTeaser } from "@/lib/content";
 import { Backdrop } from "./Backdrop";
 import { FramedMedia } from "./FramedMedia";
 import { Button, Container, SectionHeading } from "./ui";
@@ -53,17 +53,22 @@ export function Feature({ film }: { film: Film }) {
             )}
             <p className="mt-5 max-w-prose leading-relaxed text-ink/80">
               {film.synopsis && (
-                <details className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
-                  <summary className="flex min-h-11 items-center gap-2">
-                    <span>Read more</span>
-                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
-                  </summary>
-                  <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
-                    {film.synopsis.split('\n\n').map((para, i) => (
-                      <p key={i} className="mb-4">{para}</p>
-                    ))}
-                  </div>
-                </details>
+                <>
+                  <span className="details-teaser block mb-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70">
+                    {synopsisTeaser(film.synopsis)}
+                  </span>
+                  <details className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                    <summary className="flex min-h-11 items-center gap-2">
+                      <span>Read more</span>
+                      <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                    </summary>
+                    <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
+                      {film.synopsis.split('\n\n').map((para, i) => (
+                        <p key={i} className="mb-4">{para}</p>
+                      ))}
+                    </div>
+                  </details>
+                </>
               )}
             </p>
 
@@ -137,17 +142,22 @@ export function UpcomingSection({ items }: { items: UpcomingProject[] }) {
                 {p.title}
               </h3>
               {p.synopsis && (
-                <details className="mt-4">
-                  <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
-                    <span>Read more</span>
-                    <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
-                  </summary>
-                  <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
-                    {p.synopsis.split('\n\n').map((para, i) => (
-                      <p key={i} className="mb-4">{para}</p>
-                    ))}
-                  </div>
-                </details>
+                <>
+                  <p className="details-teaser mb-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70">
+                    {synopsisTeaser(p.synopsis)}
+                  </p>
+                  <details className="mt-4">
+                    <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none hover:text-ash transition-colors list-none">
+                      <span>Read more</span>
+                      <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                    </summary>
+                    <div className="mt-3 max-w-prose text-[0.95rem] leading-relaxed text-ink/70 prose prose-sm prose-ink">
+                      {p.synopsis.split('\n\n').map((para, i) => (
+                        <p key={i} className="mb-4">{para}</p>
+                      ))}
+                    </div>
+                  </details>
+                </>
               )}
             </div>
           ))}

@@ -443,3 +443,10 @@ export function relatedFilms(slug: string, count = 4): Film[] {
 export function genreLabel(item: { genres: string[] }): string {
   return item.genres.length ? item.genres.join(" / ") : "To be announced";
 }
+
+/** Short teaser preview shown before the "Read more" synopsis toggle. */
+export function synopsisTeaser(synopsis: string, max = 180): string {
+  const first = synopsis.split("\n\n")[0] ?? "";
+  if (first.length <= max) return first;
+  return `${first.slice(0, max).trimEnd()}…`;
+}

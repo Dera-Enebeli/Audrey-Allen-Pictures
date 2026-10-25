@@ -125,6 +125,15 @@ details[open] summary .arrow-rotate {
   transform: rotate(90deg);
 }
 
+/* Synopsis teaser: short preview shown before the "Read more" toggle
+   expands the full synopsis. Hidden again once the details opens. */
+.details-teaser {
+  display: block;
+}
+:has(details[open]) .details-teaser {
+  display: none;
+}
+
 /* Honour the OS "reduce motion" setting: stop the marquee, bounce and
    entrance animations, and collapse transitions. */
 @media (prefers-reduced-motion: reduce) {
