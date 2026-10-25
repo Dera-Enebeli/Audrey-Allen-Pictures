@@ -1,7 +1,9 @@
 import type { Film } from "@/lib/content";
 import { Backdrop } from "./Backdrop";
+import { Media } from "./Media";
 import { Button, Container } from "./ui";
 import { PlayIcon } from "./Icons";
+import { site } from "@/lib/site";
 
 /**
  * A24's homepage hero: full-viewport slides stacked with position:sticky, so
@@ -62,6 +64,34 @@ export function Hero({ slides }: { slides: Film[] }) {
           </Container>
         </article>
       ))}
+    </section>
+  );
+}
+
+/**
+ * Full-viewport homepage hero: just the studio's own logo animation, filling
+ * the frame edge-to-edge with a blurred backdrop behind it — the take-over
+ * treatment the picture heroes use. Full height and weight of the section.
+ */
+export function LogoHero() {
+  return (
+    <section className="relative h-[100svh] w-full overflow-hidden bg-[#241c2e]">
+      {/* blurred backdrop behind the logo, like the pictures */}
+      <div className="absolute inset-0 bg-[#4a2b3a]" />
+      <div
+        className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(74,43,58,0.85),rgba(36,28,46,0))]"
+        style={{ filter: "blur(50px)" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/70" />
+      <Media
+        video="/media/brand/LOGO.mp4"
+        alt="Audrey Allen Pictures Brand Logo"
+        accent="#4a2b3a"
+        title={site.brand.name}
+        label="The studio"
+        priority
+        className="absolute inset-0"
+      />
     </section>
   );
 }
