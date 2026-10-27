@@ -102,6 +102,9 @@ export function Spotlight({ item }: { item: Title }) {
               <Meta label="Genre" value={genreLabel(item)} />
               {film?.director && <Meta label="Director" value={film.director} />}
               {film?.credits && <Meta label="Distribution" value={film.credits} />}
+              {film?.distribution && (
+                <Meta label="Inflight" value={film.distribution.eyebrow} />
+              )}
               {series?.network && <Meta label="Network" value={series.network} />}
               <Meta label="Year" value={String(item.year)} />
             </dl>

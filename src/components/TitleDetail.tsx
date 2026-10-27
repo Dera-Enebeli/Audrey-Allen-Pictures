@@ -9,7 +9,7 @@ import { FramedMedia } from "./FramedMedia";
 import { PosterCard, railCell } from "./cards";
 import { Backdrop } from "./Backdrop";
 import { Button, Container, SectionHeading, StatusBadge } from "./ui";
-import { PlayIcon } from "./Icons";
+import { PlayIcon, PlaneIcon } from "./Icons";
 
 type Title = Film | Series;
 
@@ -33,6 +33,9 @@ export function TitleDetail({
   const videos = "videos" in item ? item.videos : undefined;
   const bts = "bts" in item ? item.bts : undefined;
   const clips = "clips" in item ? item.clips : undefined;
+  const distribution = "distribution" in item ? item.distribution : undefined;
+  const editions = "editions" in item ? item.editions : undefined;
+  const onSet = "onSet" in item ? item.onSet : undefined;
   const gallery = film?.gallery ?? ("stills" in item ? item.stills : undefined);
 
   return (
@@ -131,14 +134,138 @@ export function TitleDetail({
         </Container>
       </section>
 
+      {distribution && (
+        <section
+          id="inflight"
+          className="relative overflow-hidden border-t border-line bg-smoke py-16 sm:py-24"
+        >
+          {/* soft gold glow rising behind the poster */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-28 right-1/2 h-[34rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(201,162,39,0.13),rgba(201,162,39,0)_62%)] blur-2xl"
+          />
+          <Container className="relative">
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+              <div className="lg:col-span-5">
+                <figure className="mx-auto max-w-[360px] lg:max-w-[380px]">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-black shadow-[0_50px_90px_-30px_rgba(0,0,0,0.9)] ring-1 ring-line">
+                    <Media
+                      src={distribution.poster}
+                      alt={distribution.posterAlt}
+                      accent={item.accent}
+                      title={item.title}
+                      label={distribution.eyebrow}
+                    />
+                  </div>
+                  <figcaption className="mt-4">
+                    <p className="label text-ash">{distribution.note}</p>
+                  </figcaption>
+                </figure>
+              </div>
+              <div className="lg:col-span-7">
+                <p className="label inline-flex items-center gap-2.5 text-ash">
+                  <PlaneIcon className="h-4 w-4 text-gold" aria-hidden="true" />
+                  {distribution.eyebrow}
+                </p>
+                <h2 className="mt-5 max-w-[16ch] font-sans text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-[1.04] tracking-[-0.025em] text-white">
+                  {distribution.heading}
+                </h2>
+                <p className="mt-6 max-w-prose text-[1.05rem] leading-relaxed text-ink/75">
+                  {distribution.body}
+                </p>
+                <dl className="mt-9 grid grid-cols-1 gap-x-8 gap-y-5 border-t border-line pt-7 sm:grid-cols-3">
+                  {distribution.facts.map((fact) => (
+                    <div key={fact.label}>
+                      <dt className="label text-ash">{fact.label}</dt>
+                      <dd className="mt-1.5 text-[0.95rem] leading-snug">{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* French edition — poster right, synopsis left, on the plain ground. */}
+      {editions?.map((edition) => (
+        <section
+          key={edition.language}
+          lang={edition.language}
+          className="border-t border-line py-16 sm:py-24"
+        >
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-16">
+              <div className="order-first lg:order-none lg:col-span-7">
+                <div className="flex items-center gap-3">
+                  <span className="label">{edition.label}</span>
+                  <span className="h-1 w-1 rounded-full bg-gold" />
+                  <span className="label text-ash">{edition.language.toUpperCase()}</span>
+                </div>
+                <h2 className="mt-5 max-w-[18ch] font-sans text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-[1.04] tracking-[-0.025em] text-white">
+                  {edition.title}
+                </h2>
+                {edition.subheading && (
+                  <p className="mt-3 text-ash">{edition.subheading}</p>
+                )}
+                <div className="mt-8 max-w-prose">
+                  <p className="text-[1rem] leading-relaxed text-ink/80">
+                    {synopsisTeaser(edition.synopsis, 220)}
+                  </p>
+                  <details className="mt-4">
+                    <summary className="flex min-h-11 items-center gap-2 label text-ink cursor-pointer select-none transition-colors hover:text-ash list-none">
+                      <span>Lire le synopsis</span>
+                      <span className="ml-auto transition-transform arrow-rotate" aria-hidden="true">▸</span>
+                    </summary>
+                    <div className="mt-6 max-w-prose">
+                      {edition.synopsis.split("\n\n").map((para, i) => (
+                        <p key={i} className="mb-5 font-sans text-[1.05rem] font-medium leading-[1.65] tracking-[-0.01em] text-ink/90">
+                          {para}
+                        </p>
+                      ))}
+                    </div>
+                  </details>
+                </div>
+                {edition.facts && edition.facts.length > 0 && (
+                  <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-5 border-t border-line pt-7 sm:grid-cols-2">
+                    {edition.facts.map((fact) => (
+                      <div key={fact.label}>
+                        <dt className="label text-ash">{fact.label}</dt>
+                        <dd className="mt-1.5 text-[0.95rem] leading-snug">{fact.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+              </div>
+              <div className="order-first lg:order-none lg:col-span-5">
+                <figure className="mx-auto max-w-[360px] lg:max-w-[300px]">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-smoke ring-1 ring-line shadow-[0_50px_90px_-30px_rgba(0,0,0,0.9)]">
+                    <Media
+                      src={edition.poster}
+                      alt={edition.posterAlt}
+                      accent={item.accent}
+                      title={item.title}
+                      label={edition.label}
+                    />
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </Container>
+        </section>
+      ))}
       {/* behind the scenes — featured clip, given its own billing */}
       {bts && (
         <section className="border-t border-line py-16 sm:py-24">
           <Container>
             <SectionHeading label={bts.kind} title="Behind the Scenes" />
             <div className="mt-9 grid gap-10 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-8">
-                <div className="relative aspect-video w-full overflow-hidden bg-black">
+              <div className={bts.portrait ? "lg:col-span-5" : "lg:col-span-8"}>
+                <div
+                  className={`relative w-full overflow-hidden bg-black ${
+                    bts.portrait ? "aspect-[9/16] max-w-[340px]" : "aspect-video"
+                  }`}
+                >
                   <Media
                     video={bts.video}
                     alt={`Behind the scenes of ${item.title}`}
@@ -149,7 +276,7 @@ export function TitleDetail({
                   />
                 </div>
               </div>
-              <div className="flex flex-col justify-end lg:col-span-4">
+              <div className={`flex flex-col justify-end ${bts.portrait ? "lg:col-span-7" : "lg:col-span-4"}`}>
                 <p className="label">{bts.kind}</p>
                 <h3 className="mt-4 font-sans text-[1.6rem] font-medium leading-[1.05] tracking-[-0.025em] sm:text-[2rem]">
                   {bts.title}
@@ -244,6 +371,45 @@ export function TitleDetail({
             <SectionHeading label="From the set" title="Stills" />
             <div className="mt-9">
               <MediaRail entries={gallery} accent={item.accent} fallbackTitle={item.title} framed />
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* on set — featured behind-the-lens footage, full players */}
+      {onSet && onSet.length > 0 && (
+        <section className="border-t border-line py-16 sm:py-24">
+          <Container>
+            <SectionHeading label="From the set" title="On Set" />
+            <div className="mt-9 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {onSet
+                .filter((clip) => clip.lead)
+                .map((clip) => (
+                  <div key={clip.src} className="mx-auto w-full max-w-[920px] lg:col-span-3">
+                    <ClipPlayer
+                      src={clip.src}
+                      poster={clip.poster}
+                      title={clip.title}
+                      kind={clip.kind}
+                      caption={clip.caption}
+                      accent={item.accent}
+                      lead
+                    />
+                  </div>
+                ))}
+              {onSet
+                .filter((clip) => !clip.lead)
+                .map((clip) => (
+                  <ClipPlayer
+                    key={clip.src}
+                    src={clip.src}
+                    poster={clip.poster}
+                    title={clip.title}
+                    kind={clip.kind}
+                    caption={clip.caption}
+                    accent={item.accent}
+                  />
+                ))}
             </div>
           </Container>
         </section>

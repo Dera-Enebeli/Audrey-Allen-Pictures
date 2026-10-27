@@ -5,8 +5,11 @@
 //   /public/media/films/<slug>/poster.jpg     portrait  2:3   (poster cards)
 //   /public/media/films/<slug>/backdrop.jpg   landscape 16:9  (hero / detail)
 //   /public/media/films/<slug>/preview.mp4    optional looping video
+//   /public/media/films/<slug>/editions/<lang>-poster.jpg  alternate editions
+//   /public/media/films/<slug>/distribution/<title>-poster.jpg  airline / streamer posters
 //   /public/media/films/<slug>/cast/*.{jpg,mp4}      cast shots & clips
 //   /public/media/films/<slug>/stills/*.jpg          production stills
+//   /public/media/series/<slug>/on-set/on-set-NN.mp4  on-set footage (+ poster-NN.jpg)
 //   /public/media/series/<slug>/…              same, for series
 // If a file is missing, the card falls back to a colour + title treatment, and
 // heroes fall back to a blurred-poster layout, so nothing ever looks broken.
@@ -35,6 +38,37 @@ export interface VideoEntry {
   title: string;
   /** short role label, e.g. "Soundtrack" or "Premiere" */
   kind: string;
+}
+
+/** A featured on-set / behind-the-lens clip — gets its own section with full
+ *  player controls. The first entry with `lead` is framed wide (16:9); the rest
+ *  are portrait (9:16) tiles. */
+export interface OnSetClip {
+  src: string;
+  /** frame shown before playback — without this the player looks empty */
+  poster?: string;
+  title: string;
+  kind: string;
+  caption?: string;
+  /** the lead clip gets the wide 16:9 frame; others are constrained to portrait */
+  lead?: boolean;
+}
+
+/** A second-language edition of a film — alternate poster, synopsis and facts. */
+export interface FilmEdition {
+  /** ISO language code, e.g. "fr" */
+  language: string;
+  /** editorial eyebrow, e.g. "Version française" */
+  label: string;
+  /** edition title, e.g. "Je t’aime malgré tout" */
+  title: string;
+  /** small line above the title, e.g. "Synopsis du long métrage" */
+  subheading?: string;
+  poster: string;
+  posterAlt: string;
+  /** the synopsis, paragraphs separated by blank lines */
+  synopsis: string;
+  facts?: { label: string; value: string }[];
 }
 
 export interface Film {
@@ -68,7 +102,13 @@ export interface Film {
   /** production stills shown on the title's detail page */
   gallery?: MediaEntry[];
   /** featured behind-the-scenes clip — gets its own section on the page */
-  bts?: { video: string; title: string; kind: string; caption?: string };
+  bts?: {
+    video: string;
+    title: string;
+    kind: string;
+    caption?: string;
+    portrait?: boolean;
+  };
   /**
    * Featured clips given their own section with full player controls
    * (play/pause, scrub, volume, fullscreen).
@@ -81,6 +121,20 @@ export interface Film {
     kind: string;
     caption?: string;
   }[];
+  /** Inflight distribution block (an airline or streamer licensing). */
+  distribution?: {
+    poster: string;
+    posterAlt: string;
+    eyebrow: string;
+    heading: string;
+    body: string;
+    facts: { label: string; value: string }[];
+    note?: string;
+  };
+  /** Alternate-language editions (poster, synopsis, facts). */
+  editions?: FilmEdition[];
+  /** short note shown under the poster card (e.g. an airline marking). */
+  cardNote?: string;
   /** hex colour used for the typographic fallback tile */
   accent: string;
 }
@@ -103,9 +157,19 @@ export interface Series {
   /** production stills shown on the title's detail page */
   stills?: MediaEntry[];
   /** featured behind-the-scenes clip — gets its own section on the page */
-  bts?: { video: string; title: string; kind: string; caption?: string };
+  bts?: {
+    video: string;
+    title: string;
+    kind: string;
+    caption?: string;
+    portrait?: boolean;
+  };
+  /** Featured on-set / behind-the-lens clips (own section, full players). */
+  onSet?: OnSetClip[];
   /** the source novel, when the series is an adaptation */
   basedOn?: { title: string; author: string; cover: string; synopsis?: string };
+  /** short note shown under the poster card (e.g. a broadcaster marking). */
+  cardNote?: string;
   accent: string;
 }
 
@@ -118,13 +182,45 @@ export const films: Film[] = [
     year: 2025,
     releaseLabel: "Now Showing",
     genres: ["Romance", "Drama"],
-    director: "Audrey Allen Pictures",
+    director: "Chibuike Ike",
     credits: "Distributed by Kada Entertainment",
     tagline: "Two strangers. One impossible arrangement.",
     synopsis:
       "A romantic drama about two individuals brought together by an unusual housing arrangement. Their difficult cohabitation leads to conflict, betrayal, emotional discovery, and an unexpected journey toward love. Distributed by Kada Entertainment to more than 50 cinemas.",
     poster: "/media/films/i-love-you-regardless/poster.jpg",
     accent: "#4a2b3a",
+    cardNote: "Now on board with RwandAir",
+    distribution: {
+      poster: "/media/films/i-love-you-regardless/distribution/rwandair-poster.jpg",
+      posterAlt: "Poster for I Love You Regardless in the inflight entertainment of RwandAir",
+      eyebrow: "Inflight Entertainment",
+      heading: "Now flying with RwandAir",
+      body: "RwandAir has acquired I Love You Regardless for its inflight entertainment programme, bringing the film to passengers across Africa and beyond. International inflight distribution is handled by Nile Entertainment.",
+      facts: [
+        { label: "Airline", value: "RwandAir" },
+        { label: "Inflight distribution", value: "Nile Entertainment" },
+        { label: "On board", value: "From July" },
+      ],
+      note: "The RwandAir inflight poster for I Love You Regardless.",
+    },
+    editions: [
+      {
+        language: "fr",
+        label: "Version française",
+        title: "Je t’aime malgré tout",
+        subheading: "Synopsis du long métrage",
+        poster: "/media/films/i-love-you-regardless/editions/je-t-aime-malgre-tout-poster.jpg",
+        posterAlt: "French one-sheet poster for Je t’aime malgré tout",
+        synopsis:
+          "Lorsque deux inconnus se retrouvent contraints de partager le même appartement après avoir été victimes d’un agent immobilier peu scrupuleux, ce qui aurait dû être une simple mésaventure se transforme rapidement en une véritable guerre de caractères, d’orgueil et de survie.\n\nAucun des deux n’étant prêt à renoncer à son droit d’occuper l’appartement, ils s’affrontent sur presque tout, transformant leur espace commun en un champ de bataille fait de disputes, de ressentiment et de révélations inattendues. Pourtant, derrière leurs querelles incessantes, une compréhension mutuelle commence à naître. Peu à peu, une amitié inattendue se développe, laissant place à des sentiments que ni l’un ni l’autre n’avait imaginés.\n\nMais l’amour est rarement un long fleuve tranquille. Les trahisons, les blessures émotionnelles et les vérités difficiles menacent de détruire le lien fragile qu’ils ont construit. Confrontés aux conséquences de leurs choix, ils doivent affronter leurs peurs et décider si l’amour mérite le risque de se montrer vulnérable.\n\nJe t’aime malgré tout est une comédie romantique dramatique qui raconte l’histoire de deux personnes réunies par la tromperie, mises à l’épreuve par leurs différences et transformées par une relation inattendue. Le film explore la nature imprévisible de l’amour et la possibilité de trouver quelque chose de sincère dans les circonstances les plus improbables.\n\nParfois, l’amour ne naît pas parce que tout est parfait. Parfois, il naît malgré tout.",
+        facts: [
+          { label: "Titre original", value: "I Love You Regardless" },
+          { label: "Réalisation", value: "Chibuike Ike" },
+          { label: "Distribution", value: "Kada Entertainment" },
+          { label: "Version", value: "Française" },
+        ],
+      },
+    ],
     clips: [
       {
         src: "/media/films/i-love-you-regardless/videos/clip-01.mp4",
@@ -174,14 +270,15 @@ export const films: Film[] = [
       },
     ],
     cast: [
-      { src: "/media/films/i-love-you-regardless/cast/cast-01.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-02.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-03.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-04.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-06.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-07.jpg", alt: "Cast of I Love You Regardless" },
-      { src: "/media/films/i-love-you-regardless/cast/cast-08.jpg", alt: "Cast of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-01.jpg", alt: "Cast member of I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-02.jpg", alt: "Denrele Edun in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-03.jpg", alt: "Enyinna Nwigwe in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-04.jpg", alt: "Francis Atela in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-05.jpg", alt: "Titi Joseph in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-06.jpg", alt: "Tosin Pedro in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-07.jpg", alt: "Jidekene Achufusi in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-08.jpg", alt: "Tina Mba in I Love You Regardless" },
+      { src: "/media/films/i-love-you-regardless/cast/cast-09.jpg", alt: "Abdullateef Adedimeji in I Love You Regardless" },
     ],
     gallery: [
       { src: "/media/films/i-love-you-regardless/stills/still-01.jpg", alt: "Production still from I Love You Regardless" },
@@ -292,6 +389,8 @@ export const series: Series[] = [
       { src: "/media/series/red-crest-high/stills/still-23.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-24.jpg", alt: "Production still from Red Crest High" },
       { src: "/media/series/red-crest-high/stills/still-25.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-26.jpg", alt: "Production still from Red Crest High" },
+      { src: "/media/series/red-crest-high/stills/still-27.jpg", alt: "Production still from Red Crest High" },
     ],
     bts: {
       video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4",
@@ -299,7 +398,54 @@ export const series: Series[] = [
       kind: "Behind the scenes",
       caption:
         "From the set of Red Crest High — the ensemble and crew bringing Tosin Allen's novel to the screen.",
+      portrait: true,
     },
+    onSet: [
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-06.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-06.jpg",
+        title: "Red Crest High — A Scene in Progress",
+        kind: "On set",
+        caption:
+          "A full scene in progress with the Red Crest High ensemble — the night shoot that keeps the drama tight.",
+        lead: true,
+      },
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-04.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-04.jpg",
+        title: "Red Crest High — The Long Take",
+        kind: "On set",
+        caption: "A long, quiet shot from the Red Crest High set, built scene by scene.",
+      },
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-01.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-01.jpg",
+        title: "Red Crest High — First Take",
+        kind: "On set",
+        caption: "First take of the day, and the ensemble already giving the scene everything.",
+      },
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-03.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-03.jpg",
+        title: "Red Crest High — Rehearsal",
+        kind: "On set",
+        caption: "Rehearsal in the school hall: blocking, beats, the quiet before the loud take.",
+      },
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-02.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-02.jpg",
+        title: "Red Crest High — Between Takes",
+        kind: "On set",
+        caption: "Between takes — the cast and crew reset, breathe, and build the next moment.",
+      },
+      {
+        src: "/media/series/red-crest-high/on-set/on-set-05.mp4",
+        poster: "/media/series/red-crest-high/on-set/poster-05.jpg",
+        title: "Red Crest High — Set Life",
+        kind: "On set",
+        caption: "On set: the details that hold the story together.",
+      },
+    ],
   },
 ];
 

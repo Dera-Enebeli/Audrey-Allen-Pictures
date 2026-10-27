@@ -16,6 +16,8 @@ type MediaProps = {
   label?: string;
   className?: string;
   imgClassName?: string;
+  /** object-fit override for videos (e.g. object-contain for tall content) */
+  videoClassName?: string;
   /** object-position for the image */
   position?: string;
   /** eager-load the first slide / above-the-fold media */
@@ -38,6 +40,7 @@ export function Media({
   label,
   className = "",
   imgClassName = "",
+  videoClassName = "",
   position = "center",
   priority = false,
   onError,
@@ -96,7 +99,7 @@ export function Media({
       <div ref={wrapRef} className={`h-full w-full ${className}`}>
         {inView ? (
           <video
-            className="h-full w-full object-cover"
+            className={`h-full w-full ${videoClassName || "object-cover"}`}
             style={{ objectPosition: position }}
             poster={src || undefined}
             autoPlay

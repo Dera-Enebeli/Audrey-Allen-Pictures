@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Film, Series } from "@/lib/content";
 import { Media } from "./Media";
+import { PlaneIcon } from "./Icons";
 
 /**
  * Ruled-column cell for horizontal rails: a right hairline with matching
@@ -48,9 +49,21 @@ export function PosterCard({
             <span className="ml-1.5 h-1 w-1 rounded-full bg-gold" />
           </span>
         )}
+        {"releaseLabel" in item && !item.status && (
+          <span className="label mt-4 flex items-center">
+            {item.releaseLabel}
+            <span className="ml-1.5 h-1 w-1 rounded-full bg-gold" />
+          </span>
+        )}
         <span className="mt-2.5 block font-sans text-[1.35rem] font-medium leading-[1.08] tracking-[-0.005em] text-ash transition-colors group-hover:text-ink sm:text-[1.5rem]">
           {item.title}
         </span>
+        {item.cardNote && (
+          <span className="mt-3 flex items-center gap-2">
+            <PlaneIcon className="h-3.5 w-3.5 text-gold" />
+            <span className="label">{item.cardNote}</span>
+          </span>
+        )}
       </Link>
     </div>
   );

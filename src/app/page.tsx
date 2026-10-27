@@ -1,10 +1,10 @@
-import { LogoHero } from "@/components/Hero";
+import { Hero } from "@/components/Hero";
 import { Rail } from "@/components/Rail";
 import { PosterCard } from "@/components/cards";
 import { Spotlight, UpcomingSection } from "@/components/Sections";
 import { Container, SectionHeading } from "@/components/ui";
 import { railCell } from "@/components/cards";
-import { films, series, upcomingProjects } from "@/lib/content";
+import { films, heroSlides, series, upcomingProjects } from "@/lib/content";
 
 export default function HomePage() {
   // Curated spotlight — not just the first film, but a deliberate choice
@@ -12,8 +12,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* homepage hero — just the studio's logo animation, full height & weight */}
-      <LogoHero />
+      {/* homepage hero — vertical slideshow: studio logo first, then the
+          first titles of the slate, stacked scroll-over-scroll */}
+      <Hero slides={heroSlides} />
 
       {/* The Slate — the catalogue comes first, this IS the work */}
       <section className="border-t border-line py-16 sm:py-24">

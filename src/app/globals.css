@@ -126,11 +126,13 @@ details[open] summary .arrow-rotate {
 }
 
 /* Synopsis teaser: short preview shown before the "Read more" toggle
-   expands the full synopsis. Hidden again once the details opens. */
+   expands the full synopsis. Hidden again once the details opens. Scoped to
+   the nearest following sibling details so one open panel never hides the
+   teasers of every other section on the page. */
 .details-teaser {
   display: block;
 }
-:has(details[open]) .details-teaser {
+.details-teaser:has(~ details[open]) {
   display: none;
 }
 

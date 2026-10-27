@@ -17,17 +17,27 @@ blurred-poster layout, so nothing ever looks broken.
 ## What each title folder can hold
 
 ```
-poster.jpg       portrait  2:3   (1200×1800)  — poster cards & grids  [REQUIRED]
-backdrop.jpg     landscape 16:9  (1920×1080+) — hero & detail pages
-preview.mp4      optional looping video for the hero (muted, 6–10s, < ~5 MB)
+poster.jpg       portrait  2:3   (1200x1800)  - poster cards & grids  [REQUIRED]
+backdrop.jpg     landscape 16:9  (1920x1080+) - hero & detail pages
+preview.mp4      optional looping video for the hero (muted, 6-10s, < ~5 MB)
 cast/cast-NN.jpg portrait  cast photos (shown in the "Cast" rail)
 cast/*.mp4             short behind-the-scenes clips (looping tiles in the rail)
 stills/still-NN.jpg    production stills (shown in the "Stills" rail)
 ```
 
+**Posters with extra artwork:** a film's distribution, edition and on-set
+artwork live in subfolders rather than replacing the main poster:
+
+```
+films/<slug>/poster.jpg                        main poster
+films/<slug>/editions/<title>-poster.jpg      alternate-language editions
+films/<slug>/distribution/<title>-poster.jpg  airline / streamer posters
+series/<slug>/on-set/on-set-NN.mp4            on-set footage (with poster-NN.jpg frames)
+```
+
 **Backdrops:** after adding `backdrop.jpg`, set the title's `backdrop:` path in
 `src/lib/content.ts`. Leaving it unset (or pointing at a missing file) makes the
-hero use the blurred-poster treatment — never a broken image.
+hero use the blurred-poster treatment - never a broken image.
 
 **Cast / stills:** listed in `src/lib/content.ts` under `cast:` and `gallery:`
 so you control the order and can drop entries you don't want published.
@@ -37,10 +47,15 @@ so you control the order and can drop entries you don't want published.
 ```
 public/media/series/red-crest-high/book/book.jpg        book cover
 public/media/series/red-crest-high/book/tablet-view.jpg (optional extra art)
+public/media/series/red-crest-high/on-set/on-set-NN.mp4   on-set footage
 ```
 
 The "Based on the book" block on the series page is configured via `basedOn`
 in `src/lib/content.ts`.
+
+The "On Set" block uses one clip marked `lead` (wide 16:9 frame, constrained to
+~920px) plus the portrait clips as 9:16 tiles. Drop each compressed clip at
+`on-set/on-set-NN.mp4` and its frame at `on-set/poster-NN.jpg`.
 
 ## Foundation
 

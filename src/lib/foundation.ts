@@ -17,8 +17,8 @@ export interface FocusArea {
 }
 
 export const foundation = {
-  name: "Audrey Allen Pictures",
-  abbr: "AAP",
+  name: "Audrey Allen Foundation for Children",
+  abbr: "AAFC",
   tagline: "Telling African Stories. Inspiring the World.",
   founder: "Tosin Allen",
 

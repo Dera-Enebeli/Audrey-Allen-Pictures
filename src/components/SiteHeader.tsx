@@ -127,9 +127,12 @@ export function SiteHeader() {
 
       {/* mobile overlay menu */}
       <div
-        className="fixed inset-0 z-40 bg-paper transition-opacity duration-300 md:hidden"
+        className={`fixed inset-0 z-40 bg-paper transition-opacity duration-300 md:hidden ${
+          open ? "visible" : "invisible"
+        }`}
         style={{
           opacity: open ? 1 : 0,
+          visibility: open ? "visible" : "hidden",
           pointerEvents: open ? "auto" : "none",
         }}
       >
