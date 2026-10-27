@@ -333,6 +333,45 @@ export function TitleDetail({
                     </div>
                   </details>
                 )}
+                {(series.basedOn.tiktok ||
+                  series.basedOn.instagram ||
+                  series.basedOn.amazon) && (
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {series.basedOn.tiktok && (
+                      <Button
+                        href={series.basedOn.tiktok}
+                        external
+                        variant="outline"
+                        size="sm"
+                        icon
+                      >
+                        TikTok
+                      </Button>
+                    )}
+                    {series.basedOn.instagram && (
+                      <Button
+                        href={series.basedOn.instagram}
+                        external
+                        variant="outline"
+                        size="sm"
+                        icon
+                      >
+                        Instagram
+                      </Button>
+                    )}
+                    {series.basedOn.amazon && (
+                      <Button
+                        href={series.basedOn.amazon}
+                        external
+                        variant="outline"
+                        size="sm"
+                        icon
+                      >
+                        Amazon
+                      </Button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </Container>

@@ -169,7 +169,15 @@ export interface Series {
   /** Featured on-set / behind-the-lens clips (own section, full players). */
   onSet?: OnSetClip[];
   /** the source novel, when the series is an adaptation */
-  basedOn?: { title: string; author: string; cover: string; synopsis?: string };
+  basedOn?: {
+    title: string;
+    author: string;
+    cover: string;
+    synopsis?: string;
+    tiktok?: string;
+    instagram?: string;
+    amazon?: string;
+  };
   /** short note shown under the poster card (e.g. a broadcaster marking). */
   cardNote?: string;
   accent: string;
@@ -223,6 +231,7 @@ export const films: Film[] = [
         ],
       },
     ],
+    trailer: "https://youtu.be/LjWVy5sGHi0",
     clips: [
       {
         src: "/media/films/i-love-you-regardless/videos/clip-01.mp4",
@@ -367,6 +376,9 @@ export const series: Series[] = [
       cover: "/media/series/red-crest-high/book/book.jpg",
       synopsis:
         "Redcrest High is a compelling exploration of adolescent life, examining the social pressures, personal conflicts, and moral dilemmas that shape young people during one of the most critical stages of their development.\n\nSet against the backdrop of high school, the book examines the realities of growing up in an environment where academic expectations, social hierarchies, peer influence, family pressures, and the pursuit of acceptance often compete with personal values and sound judgment. As students navigate friendships, relationships, identity, ambition, and the consequences of their decisions, they are confronted with challenges that test their emotional maturity, integrity, and sense of responsibility.\n\nThe book addresses issues that significantly influence adolescent behaviour, including bullying, discrimination, manipulation, unhealthy relationships, dishonesty, insecurity, and the pressure to conform. It explores how these experiences affect self-esteem, academic performance, interpersonal relationships, and the development of personal values. It also considers the role of family, educators, and the wider school community in shaping young people's attitudes, choices, and understanding of right and wrong.\n\nBeyond its portrayal of school life, Redcrest High offers an educational perspective on the relationship between individual decisions and their wider consequences. It encourages young readers to examine their attitudes, recognise harmful patterns of behaviour, develop critical thinking skills, and understand the importance of accountability, empathy, respect, and responsible decision-making.\n\nDesigned to stimulate reflection and meaningful discussion among students, parents, and educators, the book provides an opportunity to address the social and emotional challenges of adolescence in a relatable and constructive manner.\n\nUltimately, Redcrest High is a story about character formation, personal responsibility, and the transition from adolescence to adulthood. It reinforces the importance of making informed choices, establishing healthy boundaries, resisting destructive influences, and recognising that the values developed during the school years can have a lasting impact on an individual's future.\n\nGenre: Young Adult Fiction | Educational Drama | Social Development\n\nTarget Audience: Secondary school students, educators, parents, and organisations committed to adolescent development and education.",
+      tiktok: "https://www.tiktok.com/@redcresthigh_book",
+      instagram: "https://www.instagram.com/redcresthigh_book",
+      amazon: "https://a.co/d/0c35th6J",
     },
     cast: [
       { src: "/media/series/red-crest-high/cast/cast-01.jpg", alt: "Cast of Red Crest High" },

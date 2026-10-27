@@ -85,10 +85,10 @@ export const site = {
 
     /** TODO: point each link at the studio's real profiles. */
     social: [
-      { label: "Instagram", href: "https://instagram.com" },
+      { label: "Instagram", href: "https://www.instagram.com/audreyallenpictures" },
       { label: "X", href: "https://x.com" },
       { label: "YouTube", href: "https://youtube.com" },
-      { label: "TikTok", href: "https://tiktok.com" },
+      { label: "TikTok", href: "https://www.tiktok.com/@redcresthigh_book" },
     ],
 
     copyright: "© 2026 Audrey Allen Pictures. All rights reserved.",
