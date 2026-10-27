@@ -104,6 +104,7 @@ export interface Film {
   /** featured behind-the-scenes clip — gets its own section on the page */
   bts?: {
     video: string;
+    poster?: string;
     title: string;
     kind: string;
     caption?: string;
@@ -159,6 +160,7 @@ export interface Series {
   /** featured behind-the-scenes clip — gets its own section on the page */
   bts?: {
     video: string;
+    poster?: string;
     title: string;
     kind: string;
     caption?: string;
@@ -324,6 +326,7 @@ export const films: Film[] = [
     ],
     bts: {
       video: "/media/films/beguiled/cast/behind-the-scenes.mp4",
+      poster: "/media/films/beguiled/cast/bts-poster.jpg",
       title: "Beguiled",
       kind: "Behind the scenes",
       caption:
@@ -394,6 +397,7 @@ export const series: Series[] = [
     ],
     bts: {
       video: "/media/series/red-crest-high/cast/behind-the-scenes.mp4",
+      poster: "/media/series/red-crest-high/cast/bts-poster.jpg",
       title: "Red Crest High",
       kind: "Behind the scenes",
       caption:

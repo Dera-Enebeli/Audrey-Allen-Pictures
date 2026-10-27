@@ -264,9 +264,10 @@ export function TitleDetail({
                 <div
                   className={`relative w-full overflow-hidden bg-black ${
                     bts.portrait ? "aspect-[9/16] max-w-[340px]" : "aspect-video"
-                  }`}
+                  } ${bts.portrait ? "justify-self-center" : ""}`}
                 >
                   <Media
+                    src={bts.poster}
                     video={bts.video}
                     alt={`Behind the scenes of ${item.title}`}
                     accent={item.accent}
